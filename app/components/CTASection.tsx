@@ -1,31 +1,55 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const SPARKS = Array.from({ length: 30 }, (_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  duration: 2 + Math.random() * 3,
+}));
 
 export default function CTASection() {
-  return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#050505] px-6 py-32">
-      {/* Background Glow */}
-      <div className="absolute inset-0">
-        <div className="absolute left-0 top-0 h-full w-[30%] bg-gradient-to-r from-[#0B2A3B]/30 to-transparent" />
-        <div className="absolute right-0 top-0 h-full w-[40%] bg-gradient-to-l from-[#140A2F]/30 to-transparent" />
-      </div>
+  const sectionRef = useRef(null);
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], [-500, 500]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#050505] px-6 py-32"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        {SPARKS.map((spark) => (
+          <motion.div
+            key={spark.id}
+            className="absolute h-2 w-2 rounded-full bg-[#B8FF00]"
+            style={{
+              left: spark.left,
+              top: spark.top,
+            }}
+            animate={{
+              y: [-20, 20, -20],
+              opacity: [0.2, 1, 0.2],
+              scale: [0.5, 1.5, 0.5],
+            }}
+            transition={{
+              duration: spark.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
       <div className="relative z-10 flex flex-col items-center">
-        {/* Heading */}
-        <div className="overflow-hidden text-center">
-          <h2
-            className="
-              text-[3.5rem]
-              leading-[0.9]
-              font-black
-              uppercase
-              italic
-              tracking-tight
-              md:text-[6rem]
-              lg:text-[7rem]
-            "
-          >
+        <motion.div style={{ x }} className="text-center">
+          <h2 className="text-[7rem] f font-black uppercase italic leading-none">
             <span className="block bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
               READY TO UNLEASH
             </span>
@@ -34,40 +58,7 @@ export default function CTASection() {
               YOUR POTENTIAL?
             </span>
           </h2>
-        </div>
-
-        {/* Button */}
-        <motion.button
-          whileHover={{
-            scale: 1.05,
-            y: -3,
-          }}
-          whileTap={{
-            scale: 0.98,
-          }}
-          transition={{
-            duration: 0.3,
-            ease: "easeOut",
-          }}
-          className="
-            mt-12
-            bg-[#6D8D00]
-            px-12
-            py-5
-            text-lg
-            font-black
-            uppercase
-            tracking-wide
-            text-black
-            shadow-[6px_6px_0px_#000]
-            transition-all
-            duration-300
-            hover:bg-[#B8FF00]
-            hover:shadow-[8px_8px_0px_#000]
-          "
-        >
-          GET STARTED NOW
-        </motion.button>
+        </motion.div>
       </div>
     </section>
   );

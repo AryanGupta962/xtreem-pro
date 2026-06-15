@@ -13,11 +13,11 @@ export default function BenefitCard({ title, description }: BenefitCardProps) {
       <div className="absolute left-0 top-0 h-full w-24 bg-[#BCE040]/5 blur-xl" />
 
       <div className="relative">
-        <h3 className="text-[28px] font-bold uppercase tracking-tight text-white">
+        <h3 className="text-[26px] font-bold uppercase tracking-tight text-white">
           {title}
         </h3>
 
-        <p className="mt-2 max-w-[90%] text-lg leading-relaxed text-zinc-400">
+        <p className="mt-2 max-w-[90%] leading-relaxed text-zinc-400">
           {description}
         </p>
       </div>

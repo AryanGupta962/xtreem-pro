@@ -12,7 +12,7 @@ export default function HeroSection() {
         preload="auto"
         className="absolute inset-0 h-full w-full object-cover object-center"
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source src="/videos/hero-new1.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

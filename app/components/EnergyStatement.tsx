@@ -102,9 +102,9 @@ export default function EnergyShowcase() {
             muted
             loop
             playsInline
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-cover"
           >
-            <source src="/videos/hero-2.webm" />
+            <source src="/videos/side-hero.mp4" />
           </video>
 
           <div className="absolute inset-0 bg-black/30" />
@@ -114,10 +114,6 @@ export default function EnergyShowcase() {
         {/* RIGHT CONTENT */}
         <div className="content-wrapper flex items-center px-8 py-20 md:px-14 lg:px-24">
           <div>
-            <span className="energy-subtitle mb-8 block text-sm font-semibold uppercase tracking-[0.5em] text-[#BCE040]">
-              EXTREEM PRO
-            </span>
-
             <div className="space-y-2">
               <div className="overflow-hidden">
                 <h2 className="reveal-line text-5xl font-black uppercase leading-none text-white md:text-7xl xl:text-8xl">
@@ -144,29 +140,6 @@ export default function EnergyShowcase() {
               long-lasting performance for those who refuse to settle for
               average.
             </p>
-
-            {/* CTA */}
-            <button className="energy-button group relative mt-12 overflow-hidden rounded-full border border-[#BCE040] px-8 py-4">
-              <span className="relative z-20 text-sm font-semibold uppercase tracking-[0.25em] transition-colors duration-500 group-hover:text-black">
-                Explore Product
-              </span>
-
-              <span className="absolute left-1/2 top-full h-4 w-4 -translate-x-1/2 rounded-full bg-[#BCE040] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:h-[350px] group-hover:w-[350px] group-hover:top-1/2 group-hover:-translate-y-1/2" />
-            </button>
-
-            {/* Features */}
-            <div className="mt-16 flex flex-wrap gap-4">
-              {["High Caffeine", "Taurine", "Ginseng", "B-Vitamins"].map(
-                (item) => (
-                  <div
-                    key={item}
-                    className="rounded-full border border-[#BCE040]/30 px-5 py-2 text-sm uppercase tracking-wider text-[#BCE040]"
-                  >
-                    {item}
-                  </div>
-                ),
-              )}
-            </div>
           </div>
         </div>
       </div>
