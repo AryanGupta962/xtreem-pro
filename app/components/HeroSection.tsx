@@ -967,9 +967,9 @@ export default function HeroSection() {
               loop
               playsInline
               preload="none"
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-fill object-center"
             >
-              <source src="/videos/hero-new1.mp4" type="video/mp4" />
+              <source src="/videos/hero-3.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
