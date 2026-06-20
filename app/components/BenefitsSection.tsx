@@ -460,6 +460,8 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import ElectricBorder from "./ElectricBorder";
+import ProductCan from "./ProductCan";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -837,90 +839,98 @@ export default function PowerSection() {
           </div>
 
           {INGREDIENTS.map((ing, i) => (
-            <div
+            <ElectricBorder
               key={ing.id}
-              className={`ing-card ing-card-${i}
+              color="#BCE040"
+              speed={1.2}
+              chaos={0.08}
+              borderRadius={1}
+              className="w-full"
+            >
+              <div
+                className={`ing-card ing-card-${i}
                 relative flex-shrink-0
                 flex md:flex items-center gap-3 md:gap-4
                 px-4 md:px-5 py-3 md:py-4
                 border transition-all duration-300 cursor-default
                 min-w-[160px] md:min-w-0
               `}
-              style={{
-                background:
-                  i === activeIndex
-                    ? "rgba(188,224,64,0.08)"
-                    : "rgba(255,255,255,0.02)",
-                borderColor:
-                  i === activeIndex
-                    ? "rgba(188,224,64,0.4)"
-                    : "rgba(255,255,255,0.06)",
-                boxShadow:
-                  i === activeIndex
-                    ? "inset 0 0 20px rgba(188,224,64,0.05), 0 0 20px rgba(188,224,64,0.08)"
-                    : "none",
-              }}
-            >
-              {/* Active indicator bar */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500"
                 style={{
-                  background: i === activeIndex ? "#aafc1c" : "transparent",
+                  background:
+                    i === activeIndex
+                      ? "rgba(188,224,64,0.08)"
+                      : "rgba(255,255,255,0.02)",
+                  borderColor:
+                    i === activeIndex
+                      ? "rgba(188,224,64,0.4)"
+                      : "rgba(255,255,255,0.06)",
                   boxShadow:
                     i === activeIndex
-                      ? "0 0 10px rgba(188,224,64,0.9)"
+                      ? "inset 0 0 20px rgba(188,224,64,0.05), 0 0 20px rgba(188,224,64,0.08)"
                       : "none",
                 }}
-              />
-
-              {/* Code */}
-              <span
-                className="font-black text-[10px] md:text-[11px] tracking-[0.2em] uppercase w-10 md:w-12 flex-shrink-0"
-                style={{
-                  color:
-                    i === activeIndex ? "#aafc1c" : "rgba(188,224,64,0.25)",
-                }}
               >
-                {ing.code}
-              </span>
-
-              {/* Title + sub */}
-              <div className="min-w-0">
+                {/* Active indicator bar */}
                 <div
-                  className="font-black uppercase text-sm md:text-base leading-none"
+                  className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500"
+                  style={{
+                    background: i === activeIndex ? "#aafc1c" : "transparent",
+                    boxShadow:
+                      i === activeIndex
+                        ? "0 0 10px rgba(188,224,64,0.9)"
+                        : "none",
+                  }}
+                />
+
+                {/* Code */}
+                <span
+                  className="font-black text-[10px] md:text-[11px] tracking-[0.2em] uppercase w-10 md:w-12 flex-shrink-0"
                   style={{
                     color:
-                      i === activeIndex ? "#fff" : "rgba(255,255,255,0.22)",
+                      i === activeIndex ? "#aafc1c" : "rgba(188,224,64,0.25)",
                   }}
                 >
-                  {ing.title}
+                  {ing.code}
+                </span>
+
+                {/* Title + sub */}
+                <div className="min-w-0">
+                  <div
+                    className="font-black uppercase text-sm md:text-base leading-none"
+                    style={{
+                      color:
+                        i === activeIndex ? "#fff" : "rgba(255,255,255,0.22)",
+                    }}
+                  >
+                    {ing.title}
+                  </div>
+                  <div
+                    className="text-[9px] md:text-[10px] tracking-[0.25em] uppercase mt-0.5"
+                    style={{
+                      color:
+                        i === activeIndex
+                          ? "rgba(188,224,64,0.6)"
+                          : "rgba(255,255,255,0.15)",
+                    }}
+                  >
+                    {ing.subtitle}
+                  </div>
                 </div>
+
+                {/* Index */}
                 <div
-                  className="text-[9px] md:text-[10px] tracking-[0.25em] uppercase mt-0.5"
+                  className="ml-auto font-black text-xl md:text-2xl leading-none flex-shrink-0"
                   style={{
                     color:
                       i === activeIndex
-                        ? "rgba(188,224,64,0.6)"
-                        : "rgba(255,255,255,0.15)",
+                        ? "rgba(188,224,64,0.2)"
+                        : "rgba(255,255,255,0.05)",
                   }}
                 >
-                  {ing.subtitle}
+                  {i + 1}
                 </div>
               </div>
-
-              {/* Index */}
-              <div
-                className="ml-auto font-black text-xl md:text-2xl leading-none flex-shrink-0"
-                style={{
-                  color:
-                    i === activeIndex
-                      ? "rgba(188,224,64,0.2)"
-                      : "rgba(255,255,255,0.05)",
-                }}
-              >
-                {i + 1}
-              </div>
-            </div>
+            </ElectricBorder>
           ))}
         </div>
 
@@ -1029,7 +1039,7 @@ export default function PowerSection() {
           />
 
           {/* The Can */}
-          <Image
+          {/* <Image
             src="/images/can.png"
             alt="XTREEM Pro XP Energy Drink"
             width={600}
@@ -1041,16 +1051,14 @@ export default function PowerSection() {
               width: "auto",
               filter: "drop-shadow(0 0 55px rgba(188,224,64,0.38))",
             }}
-          />
+          /> */}
+          <ProductCan />
 
           {/* Charge complete overlay */}
           <div
             className="charge-complete absolute z-20 text-center pointer-events-none"
             style={{ opacity: 0, transform: "translateY(28px)" }}
           >
-            <div className="text-[9px] tracking-[0.5em] uppercase text-[#aafc1c]/50 mb-2">
-              Formula Complete
-            </div>
             <div
               className="font-black uppercase leading-none text-[#c7df0d]"
               style={{

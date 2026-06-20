@@ -72,7 +72,7 @@ function AnimatedText({ text }: { text: string }) {
 }
 function Navbar() {
   return (
-    <header className="fixed top-5 left-0 right-0 z-50 px-4 md:px-8">
+    <header className="fixed top-3 left-0 right-0 z-50 px-4 md:px-8">
       <motion.div
         initial={{
           y: -100,
