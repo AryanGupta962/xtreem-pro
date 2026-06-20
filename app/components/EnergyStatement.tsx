@@ -91,8 +91,8 @@ export default function EnergyShowcase() {
       className="relative min-h-screen overflow-hidden bg-black"
     >
       {/* Background Glow */}
-      <div className="absolute left-0 top-0 h-[500px] w-[500px] bg-[#BCE040]/10 blur-[180px]" />
-      <div className="absolute right-0 bottom-0 h-[500px] w-[500px] bg-[#BCE040]/10 blur-[180px]" />
+      {/* <div className="absolute left-0 top-0 h-[500px] w-[500px] bg-primary-green/10 blur-[180px]" />
+      <div className="absolute right-0 bottom-0 h-[500px] w-[500px] bg-primary-green/10 blur-[180px]" /> */}
 
       <div className="grid min-h-screen lg:grid-cols-[0.85fr_1.15fr]">
         {/* LEFT VIDEO */}
@@ -107,8 +107,7 @@ export default function EnergyShowcase() {
             <source src="/videos/side-hero.mp4" />
           </video>
 
-          <div className="absolute inset-0 bg-black/30" />
-          <div className="absolute inset-0 bg-[#BCE040]/10 mix-blend-screen" />
+      
         </div>
 
         {/* RIGHT CONTENT */}
@@ -128,7 +127,7 @@ export default function EnergyShowcase() {
               </div>
 
               <div className="overflow-hidden">
-                <h2 className="reveal-line text-5xl font-black uppercase leading-none md:text-7xl xl:text-8xl text-[#BCE040]">
+                <h2 className="reveal-line text-5xl font-black uppercase leading-none md:text-7xl xl:text-8xl text-primary-green">
                   POTENTIAL
                 </h2>
               </div>

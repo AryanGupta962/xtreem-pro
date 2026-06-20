@@ -82,7 +82,7 @@ export default function EnergyCursor() {
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-[#BCE040]
+          bg-primary-green
           blur-3xl
           animate-pulse
         "
@@ -99,7 +99,7 @@ export default function EnergyCursor() {
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-[#BCE040]
+          bg-primary-green
           shadow-[0_0_15px_#22c55e,0_0_35px_#22c55e,0_0_70px_#22c55e]
         "
       />
@@ -115,7 +115,7 @@ export default function EnergyCursor() {
             h-1
             w-1
             rounded-full
-            bg-[#BCE040]
+            bg-primary-green
             animate-ping
           "
           style={{

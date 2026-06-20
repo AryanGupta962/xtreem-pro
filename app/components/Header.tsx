@@ -90,7 +90,7 @@ function Navbar() {
           relative
           mx-auto
           flex
-          h-18
+          h-15
           max-w-375
           items-center
           justify-between

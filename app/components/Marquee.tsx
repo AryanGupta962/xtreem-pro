@@ -11,7 +11,7 @@ export default function EnergyMarquee() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#BCE040] py-3">
+    <section className="relative overflow-hidden bg-primary-green py-3">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_70%)]" />
 
       <div className="marquee-container">

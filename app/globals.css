@@ -19,6 +19,21 @@
   }
 }
 
+@theme {
+  /* XTREEM PRO Colors */
+  --color-primary-green: #aafc1c;
+  --color-xp-green-dark: #a2bc15;
+  --color-xp-green-deep: #829a0e;
+  --color-xp-glow: #ecf3b8;
+  --color-xp-black: #050505;
+  --color-xp-white: #f1f1f0;
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -29,9 +44,9 @@ body {
 .energy-ring {
   background: conic-gradient(
     from 0deg,
-    #bce040,
+    #aafc1c,
     transparent,
-    #bce040
+    #aafc1c
   );
 
   filter: blur(25px);

@@ -8,7 +8,7 @@ export default function DistributorForm() {
         absolute
         -inset-4
         rounded-[40px]
-        bg-[#BCE040]/10
+        bg-primary-green/10
         blur-3xl
       "
       />
@@ -30,7 +30,7 @@ export default function DistributorForm() {
           absolute
           inset-0
           bg-gradient-to-br
-          from-[#BCE040]/5
+          from-primary-green/5
           via-transparent
           to-transparent
         "
@@ -47,7 +47,7 @@ export default function DistributorForm() {
           "
           >
             Join The
-            <span className="block text-[#BCE040]">XTREEM Network</span>
+            <span className="block text-primary-green">XTREEM Network</span>
           </h3>
 
           <p className="mt-4 text-sm text-zinc-400">
@@ -59,31 +59,31 @@ export default function DistributorForm() {
             <div className="grid gap-4 md:grid-cols-2">
               <input
                 placeholder="Full Name"
-                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-[#BCE040]"
+                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
               />
 
               <input
                 placeholder="Company Name"
-                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-[#BCE040]"
+                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
               />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <input
                 placeholder="Email Address"
-                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-[#BCE040]"
+                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
               />
 
               <input
                 placeholder="Mobile Number"
-                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-[#BCE040]"
+                className="h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
               />
             </div>
 
             <textarea
               rows={5}
               placeholder="Tell us about your distribution network..."
-              className="resize-none w-full rounded-xl border border-white/10 bg-white/[0.03] p-5 text-white outline-none transition-all duration-300 focus:border-[#BCE040]"
+              className="resize-none w-full rounded-xl border border-white/10 bg-white/[0.03] p-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
             />
 
             <button
@@ -94,7 +94,7 @@ export default function DistributorForm() {
               w-full
               overflow-hidden
               rounded-xl
-              bg-[#BCE040]
+              bg-primary-green
               font-black
               uppercase
               tracking-[0.2em]

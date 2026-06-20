@@ -87,9 +87,9 @@ export default function DistributorSection() {
       </div>
 
       {/* Energy Glow */}
-      <div className="absolute -left-20 top-0 h-[400px] w-[400px] rounded-full bg-[#BCE040]/10 blur-[140px]" />
+      <div className="absolute -left-20 top-0 h-[400px] w-[400px] rounded-full bg-primary-green/10 blur-[140px]" />
 
-      <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-[#BCE040]/10 blur-[180px]" />
+      <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-primary-green/10 blur-[180px]" />
 
       {/* Radial Overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(188,224,64,0.08),transparent_70%)]" />
@@ -106,7 +106,7 @@ export default function DistributorSection() {
               <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] md:text-6xl lg:text-7xl">
                 <span className="block text-white">Become An</span>
 
-                <span className="block bg-gradient-to-r from-[#BCE040] via-[#D9FF69] to-[#BCE040] bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-primary-green via-[#D9FF69] to-primary-green bg-clip-text text-transparent">
                   XTREEM PARTNER
                 </span>
               </h2>
@@ -145,7 +145,7 @@ export default function DistributorSection() {
           {/* RIGHT */}
           <div className="form-container relative">
             {/* Glow Behind Form */}
-            <div className="absolute -inset-4 rounded-[40px] bg-[#BCE040]/10 blur-3xl" />
+            <div className="absolute -inset-4 rounded-[40px] bg-primary-green/10 blur-3xl" />
 
             <div className="relative">
               <DistributorForm />
