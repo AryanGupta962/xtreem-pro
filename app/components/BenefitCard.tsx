@@ -14,7 +14,7 @@ export default function BenefitCard({ title, description }: BenefitCardProps) {
       borderRadius={20}
       className="w-full"
     >
-      <div className="relative overflow-hidden rounded-[20px] bg-black/70 backdrop-blur-md px-8 py-6">
+      <div className="relative overflow-hidden rounded-[20px] bg-black/70 backdrop-blur-md pl-10 py-4">
         {/* Background Glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-green/10 via-transparent to-primary-green/5" />
 
@@ -26,7 +26,7 @@ export default function BenefitCard({ title, description }: BenefitCardProps) {
             {title}
           </h3>
 
-          <p className="mt-3 max-w-[90%] text-zinc-300 leading-relaxed">
+          <p className="max-w-[90%] text-zinc-300 leading-relaxed text-base">
             {description}
           </p>
         </div>

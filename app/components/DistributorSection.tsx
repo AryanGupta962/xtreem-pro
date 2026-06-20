@@ -77,7 +77,7 @@ export default function DistributorSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-black py-32"
+      className="relative overflow-hidden bg-black py-20"
     >
       {/* Background Branding */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -103,7 +103,7 @@ export default function DistributorSection() {
           {/* LEFT */}
           <div>
             <div className="heading">
-              <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.04em] md:text-6xl lg:text-7xl">
+              <h2 className="text-4xl pl-10 font-black uppercase leading-[0.9] tracking-[-0.04em] md:text-5xl">
                 <span className="block text-white">Become An</span>
 
                 <span className="block bg-gradient-to-r from-primary-green via-[#D9FF69] to-primary-green bg-clip-text text-transparent">
@@ -112,13 +112,13 @@ export default function DistributorSection() {
               </h2>
             </div>
 
-            <p className="description mt-8 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl">
+            <p className="description mt-6 pl-10 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl">
               Join one of the fastest-growing energy drink brands and build a
               profitable distribution network backed by premium branding,
               marketing support, and explosive market demand.
             </p>
 
-            <div className="mt-14 space-y-5">
+            <div className="mt-6 space-y-5">
               <div className="benefit-card">
                 <BenefitCard
                   title="Strong Retail Demand"

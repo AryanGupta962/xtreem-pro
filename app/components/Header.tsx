@@ -100,7 +100,6 @@ function Navbar() {
           border-white/10
           bg-white/10
           px-6
-          md:px-10
           backdrop-blur-2xl
           shadow-[0_0_50px_rgba(255,255,255,0.03)]
         "
@@ -121,7 +120,7 @@ function Navbar() {
 
         {/* Logo */}
         <Link href="/">
-          <div className="relative h-10 w-36 md:h-12 md:w-44">
+          <div className="relative h-10 w-36">
             <Image
               src="/images/logo.webp"
               alt="Logo"
@@ -133,7 +132,7 @@ function Navbar() {
         </Link>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-8 md:gap-12">
+        <nav className="flex items-center gap-6 ">
           {navItems.map((item) => (
             <motion.div
               key={item.label}
@@ -152,7 +151,7 @@ function Navbar() {
                   uppercase
                   tracking-[0.15em]
                   text-white
-                  md:text-base
+                  md:text-xs
                 "
               >
                 <AnimatedText text={item.label} />

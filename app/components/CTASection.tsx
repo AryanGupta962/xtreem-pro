@@ -23,7 +23,7 @@ export default function CTASection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-[#050505] px-6 py-32"
+      className="relative flex min-h-[40vh] items-center justify-center overflow-hidden bg-[#050505] px-6 py-32"
     >
       <div className="absolute inset-0 pointer-events-none">
         {SPARKS.map((spark) => (
@@ -49,8 +49,8 @@ export default function CTASection() {
       </div>
       <div className="relative z-10 flex flex-col items-center">
         <motion.div style={{ x }} className="text-center">
-          <h2 className="text-[7rem] f font-black uppercase italic leading-none">
-            <span className="block bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
+          <h2 className="text-[5rem] font-black uppercase italic leading-none">
+            <span className="pr-2 block bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
               READY TO UNLEASH
             </span>
 

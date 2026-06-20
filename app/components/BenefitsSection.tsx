@@ -1055,7 +1055,7 @@ export default function PowerSection() {
           <ProductCan />
 
           {/* Charge complete overlay */}
-          <div
+          {/* <div
             className="charge-complete absolute z-20 text-center pointer-events-none"
             style={{ opacity: 0, transform: "translateY(28px)" }}
           >
@@ -1073,7 +1073,7 @@ export default function PowerSection() {
                 Potential
               </span>
             </div>
-          </div>
+          </div> */}
 
           {/* Mobile mini tags row */}
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-2 md:hidden z-30">
@@ -1126,7 +1126,7 @@ export default function PowerSection() {
               {/* Ingredient name */}
               <h3
                 className="font-black uppercase leading-none tracking-tight text-white"
-                style={{ fontSize: "clamp(36px,5vw,68px)" }}
+                style={{ fontSize: "clamp(36px,5vw,56px)" }}
               >
                 {ing.title}
               </h3>

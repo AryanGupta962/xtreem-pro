@@ -21,7 +21,7 @@ export default function DistributorForm() {
         border
         border-white/10
         bg-[#0A0A0A]/80
-        p-8
+        p-6
         backdrop-blur-2xl
       "
       >
@@ -50,12 +50,12 @@ export default function DistributorForm() {
             <span className="block text-primary-green">XTREEM Network</span>
           </h3>
 
-          <p className="mt-4 text-sm text-zinc-400">
+          <p className="mt-3 text-sm text-zinc-400">
             Become an official distribution partner and grow with one of the
             fastest-growing energy drink brands.
           </p>
 
-          <form className="mt-8 space-y-5">
+          <form className="mt-5 space-y-3">
             <div className="grid gap-4 md:grid-cols-2">
               <input
                 placeholder="Full Name"
@@ -90,14 +90,14 @@ export default function DistributorForm() {
               className="
               group
               relative
-              h-16
+              h-12
               w-full
               overflow-hidden
               rounded-xl
               bg-primary-green
               font-black
               uppercase
-              tracking-[0.2em]
+              
               text-black
               transition-all
               duration-300

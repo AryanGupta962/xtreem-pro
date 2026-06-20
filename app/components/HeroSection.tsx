@@ -867,13 +867,13 @@ export default function HeroSection() {
                 style={{
                   animationDelay: "400ms",
                   animationFillMode: "forwards",
-                  fontSize: "clamp(2.4rem, 8vw, 3.5rem)",
+                  fontSize: "clamp(2.4rem, 8vw, 3rem)",
                   letterSpacing: "-0.02em",
                 }}
               >
                 <span className="text-shimmer">#Premium Energy</span>
                 <br />
-                <span className="text-white">Only ₹60</span>
+                {/* <span className="text-white">Only ₹60</span> */}
               </h1>
             </div>
           </div>
@@ -925,14 +925,14 @@ export default function HeroSection() {
               </div>
 
               {/* Stat row */}
-              <div
+              {/* <div
                 className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-16"
                 style={{ opacity: phase2Progress }}
               >
                 {[
                   { val: "75mg", label: "Natural Caffeine" },
                   { val: "250ml", label: "Per Can" },
-                  { val: "₹60", label: "Premium Price" },
+                  // { val: "₹60", label: "Premium Price" },
                   { val: "0g", label: "Sugar Crash" },
                 ].map(({ val, label }) => (
                   <div key={label} className="text-center">
@@ -944,7 +944,7 @@ export default function HeroSection() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
 

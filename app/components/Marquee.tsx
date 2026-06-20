@@ -11,7 +11,7 @@ export default function EnergyMarquee() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-primary-green py-3">
+    <section className="relative overflow-hidden bg-primary-green">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_70%)]" />
 
       <div className="marquee-container">
@@ -21,7 +21,7 @@ export default function EnergyMarquee() {
               key={index}
               className="flex items-center gap-8 whitespace-nowrap"
             >
-              <span className="text-black text-sm md:text-lg font-black uppercase tracking-[0.2em]">
+              <span className="text-black text-[13px] font-black uppercase tracking-[0.2em]">
                 {item}
               </span>
 
