@@ -134,7 +134,7 @@ export default function EnergyShowcase() {
             </div>
 
             <p className="energy-description mt-10 max-w-xl text-base leading-relaxed text-zinc-400 md:text-lg">
-              Powered with Taurine, Caffeine, Ginseng and B-Vitamins. Extreem
+              Powered with Taurine, Caffeine and B-Vitamins. Extreem
               Pro delivers intense energy, enhanced endurance, sharper focus and
               long-lasting performance for those who refuse to settle for
               average.

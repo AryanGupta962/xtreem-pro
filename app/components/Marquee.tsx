@@ -6,7 +6,6 @@ export default function EnergyMarquee() {
     "TAURINE",
     "VITAMINS B",
     "ENHANCED ENDURANCE",
-    "GINSENG",
     "INTENSE ENERGY",
   ];
 

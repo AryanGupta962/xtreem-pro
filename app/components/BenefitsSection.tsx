@@ -600,6 +600,10 @@ export default function PowerSection() {
       });
 
       /* ── initial states ── */
+      gsap.set(".can-img", {
+        x: -90,
+        rotate: -15,
+      });
       gsap.set(".ing-card", { opacity: 0, x: -40 });
       gsap.set(".ing-card-0", { opacity: 1, x: 0 });
       gsap.set(".detail-panel", { opacity: 0, y: 30 });
@@ -613,8 +617,8 @@ export default function PowerSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=5600",
-          scrub: 1.3,
+          end: "+=600",
+          scrub: 0.6,
           pin: true,
           onUpdate: (self) => {
             // drive active card state from scroll progress
@@ -627,7 +631,13 @@ export default function PowerSection() {
         },
       });
 
-      tl.to(".progress-fill", { height: "100%", ease: "none", duration: 4 }, 0);
+      tl.to(".progress-fill", { height: "100%", ease: "none", duration: 3 }, 0);
+
+      const canPositions = [
+        { x: -90, rotate: -15 }, // B-Vitamins
+        { x: 0, rotate: 0 }, // Taurine
+        { x: 90, rotate: 15 }, // Caffeine
+      ];
 
       INGREDIENTS.forEach((_, i) => {
         const isFirst = i === 0;
@@ -638,7 +648,7 @@ export default function PowerSection() {
           tl.to(`.ing-card-${i}`, { opacity: 1, x: 0, duration: 0.6 });
           tl.to(
             `.detail-panel-${i}`,
-            { opacity: 1, y: 0, duration: 0.7 },
+            { opacity: 1, y: 0, duration: 0.1 },
             "<0.1",
           );
 
@@ -650,12 +660,16 @@ export default function PowerSection() {
           );
 
           /* can glow intensifies */
+          /* can movement + glow */
           tl.to(
             ".can-img",
             {
+              x: canPositions[i].x,
+              rotate: canPositions[i].rotate,
+              scale: 1 + i * 0.05,
               filter: `drop-shadow(0 0 ${50 + i * 22}px rgba(188,224,64,${0.35 + i * 0.1}))`,
-              scale: 1 + i * 0.045,
               duration: 0.8,
+              ease: "power3.inOut",
             },
             "<",
           );
@@ -677,7 +691,9 @@ export default function PowerSection() {
 
       /* final reveal */
       tl.to(".can-img", {
-        scale: 1.45,
+        x: 0,
+        rotate: 0,
+        scale: 1.2,
         filter: "drop-shadow(0 0 120px rgba(188,224,64,0.75))",
         duration: 1.3,
       });
@@ -1047,33 +1063,26 @@ export default function PowerSection() {
             priority
             className="can-img relative z-10 object-contain"
             style={{
-              height: "clamp(180px, 32vw, 340px)",
+              height: "clamp(180px, 32vw, 300px)",
               width: "auto",
               filter: "drop-shadow(0 0 55px rgba(188,224,64,0.38))",
             }}
           /> */}
-          <ProductCan />
 
-          {/* Charge complete overlay */}
-          {/* <div
-            className="charge-complete absolute z-20 text-center pointer-events-none"
-            style={{ opacity: 0, transform: "translateY(28px)" }}
-          >
-            <div
-              className="font-black uppercase leading-none text-[#c7df0d]"
-              style={{
-                fontSize: "clamp(22px,5vw,44px)",
-                textShadow: "0 0 60px rgba(188,224,64,0.7)",
-              }}
-            >
-              Unleash{" "}
-              <span className="text-white">
-                Your
-                <br />
-                Potential
-              </span>
-            </div>
-          </div> */}
+          <ProductCan />
+          {/* <Image
+            src="/images/can.png"
+            alt="XTREEM Pro XP Energy Drink"
+            width={600}
+            height={600}
+            priority
+            className="can-img relative z-10 object-contain"
+            style={{
+              height: "clamp(180px, 32vw, 300px)",
+              width: "auto",
+              filter: "drop-shadow(0 0 55px rgba(188,224,64,0.38))",
+            }}
+          /> */}
 
           {/* Mobile mini tags row */}
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-2 md:hidden z-30">

@@ -39,7 +39,7 @@ export default function ProductCan() {
 
   return (
     <div
-      className="flex items-center justify-center [perspective:1200px]"
+      className="flex items-center justify-center perspective-distant"
       onMouseMove={handleMouseMove}
       onMouseLeave={resetTilt}
     >
