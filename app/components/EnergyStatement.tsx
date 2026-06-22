@@ -76,29 +76,29 @@ export default function EnergyShowcase() {
         </div>
 
         {/* RIGHT CONTENT */}
-        <div className="content-wrapper flex items-center px-8 py-20 md:px-14 lg:px-24">
+        <div className="content-wrapper flex items-center px-5 py-14 sm:py-20 md:px-14 lg:px-24">
           <div>
             <div className="space-y-2">
               <div className="overflow-hidden">
-                <h2 className="reveal-line text-5xl font-black uppercase leading-none text-white md:text-7xl xl:text-8xl">
+                <h2 className="reveal-line text-4xl font-black uppercase leading-none text-white sm:text-5xl md:text-7xl xl:text-8xl">
                   UNLEASH
                 </h2>
               </div>
 
               <div className="overflow-hidden">
-                <h2 className="reveal-line text-5xl font-black uppercase leading-none text-white md:text-7xl xl:text-8xl">
+                <h2 className="reveal-line text-4xl font-black uppercase leading-none text-white sm:text-5xl md:text-7xl xl:text-8xl">
                   YOUR
                 </h2>
               </div>
 
               <div className="overflow-hidden">
-                <h2 className="reveal-line text-5xl font-black uppercase leading-none md:text-7xl xl:text-8xl text-primary-green">
+                <h2 className="reveal-line text-4xl font-black uppercase leading-none sm:text-5xl md:text-7xl xl:text-8xl text-primary-green">
                   POTENTIAL
                 </h2>
               </div>
             </div>
 
-            <p className="energy-description mt-10 max-w-xl text-base leading-relaxed text-zinc-400 md:text-lg">
+            <p className="energy-description mt-6 sm:mt-10 max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base md:text-lg">
               Powered with Taurine, Caffeine and B-Vitamins. Extreem
               Pro delivers intense energy, enhanced endurance, sharper focus and
               long-lasting performance for those who refuse to settle for

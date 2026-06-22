@@ -18,13 +18,13 @@ export default function EnergyMarquee() {
           {[...items, ...items, ...items].map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-8 whitespace-nowrap"
+              className="flex items-center gap-4 sm:gap-8 whitespace-nowrap"
             >
-              <span className="text-black text-[13px] font-black uppercase tracking-[0.2em]">
+              <span className="text-black text-[11px] sm:text-[13px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em]">
                 {item}
               </span>
 
-              <span className="text-black text-xl md:text-2xl font-black">
+              <span className="text-black text-lg sm:text-xl md:text-2xl font-black">
                 •
               </span>
             </div>

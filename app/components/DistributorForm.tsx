@@ -40,8 +40,8 @@ export default function DistributorForm() {
       <div
         className="
         absolute
-        -inset-4
-        rounded-[40px]
+        -inset-2 sm:-inset-4
+        rounded-[24px] sm:rounded-[40px]
         bg-primary-green/10
         blur-3xl
       "
@@ -51,11 +51,11 @@ export default function DistributorForm() {
         className="
         relative
         overflow-hidden
-        rounded-[32px]
+        rounded-[20px] sm:rounded-[32px]
         border
         border-white/10
         bg-[#0A0A0A]/80
-        p-6
+        p-4 sm:p-6
         backdrop-blur-2xl
       "
       >
@@ -73,7 +73,7 @@ export default function DistributorForm() {
         <div className="relative">
           <h3
             className="
-            text-3xl
+            text-2xl sm:text-3xl
             font-black
             uppercase
             leading-none
@@ -116,7 +116,7 @@ export default function DistributorForm() {
                     value={formData.fullName}
                     onChange={handleChange}
                     autoComplete="name"
-                    className="w-full h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
+                    className="w-full h-12 sm:h-14 rounded-xl border border-white/10 bg-white/[0.03] px-4 sm:px-5 text-sm sm:text-base text-white outline-none transition-all duration-300 focus:border-primary-green"
                   />
                 </div>
 
@@ -131,7 +131,7 @@ export default function DistributorForm() {
                     value={formData.companyName}
                     onChange={handleChange}
                     autoComplete="organization"
-                    className="w-full h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
+                    className="w-full h-12 sm:h-14 rounded-xl border border-white/10 bg-white/[0.03] px-4 sm:px-5 text-sm sm:text-base text-white outline-none transition-all duration-300 focus:border-primary-green"
                   />
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function DistributorForm() {
                     value={formData.email}
                     onChange={handleChange}
                     autoComplete="email"
-                    className="w-full h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
+                    className="w-full h-12 sm:h-14 rounded-xl border border-white/10 bg-white/[0.03] px-4 sm:px-5 text-sm sm:text-base text-white outline-none transition-all duration-300 focus:border-primary-green"
                   />
                 </div>
 
@@ -163,7 +163,7 @@ export default function DistributorForm() {
                     value={formData.mobile}
                     onChange={handleChange}
                     autoComplete="tel"
-                    className="w-full h-14 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
+                    className="w-full h-12 sm:h-14 rounded-xl border border-white/10 bg-white/[0.03] px-4 sm:px-5 text-sm sm:text-base text-white outline-none transition-all duration-300 focus:border-primary-green"
                   />
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function DistributorForm() {
                   placeholder="Tell us about your distribution network..."
                   value={formData.message}
                   onChange={handleChange}
-                  className="resize-none w-full rounded-xl border border-white/10 bg-white/[0.03] p-5 text-white outline-none transition-all duration-300 focus:border-primary-green"
+                  className="resize-none w-full rounded-xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 text-sm sm:text-base text-white outline-none transition-all duration-300 focus:border-primary-green"
                 />
               </div>
 
