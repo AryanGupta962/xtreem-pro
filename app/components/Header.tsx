@@ -126,6 +126,7 @@ function Navbar() {
               alt="Logo"
               fill
               priority
+              sizes="144px"
               className="object-contain"
             />
           </div>

@@ -24,35 +24,11 @@ export default function EnergyShowcase() {
         },
       });
 
-      gsap.from(".energy-subtitle", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        delay: 0.2,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: ".content-wrapper",
-          start: "top 75%",
-        },
-      });
-
       gsap.from(".energy-description", {
         y: 50,
         opacity: 0,
         duration: 1,
         delay: 0.4,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: ".content-wrapper",
-          start: "top 75%",
-        },
-      });
-
-      gsap.from(".energy-button", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        delay: 0.6,
         ease: "power4.out",
         scrollTrigger: {
           trigger: ".content-wrapper",
@@ -68,17 +44,6 @@ export default function EnergyShowcase() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-        },
-      });
-
-      gsap.from(".energy-divider", {
-        scaleY: 0,
-        transformOrigin: "top",
-        duration: 1.5,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
         },
       });
     },

@@ -703,7 +703,7 @@ export default function PowerSection() {
         { scale: 3.5, opacity: 0, duration: 1.0 },
         "<0.15",
       );
-      tl.to(".charge-complete", { opacity: 1, y: 0, duration: 1.0 }, "<0.3");
+      // .charge-complete element removed — animation target cleaned up
     },
     { scope: sectionRef },
   );
