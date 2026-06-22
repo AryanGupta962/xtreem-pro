@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Logo */}
         <Image
           src="/images/logo.webp"
-          alt="Sting Energy"
+          alt="XTREEM PRO Logo"
           width={1200}
           height={300}
           className="w-full max-w-50 h-[80px] object-contain"

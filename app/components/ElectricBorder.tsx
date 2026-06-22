@@ -273,7 +273,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
         height = newSize.height;
       }
 
-      const deltaTime = (currentTime - lastFrameTimeRef.current) / 1000;
+      const deltaTime = lastFrameTimeRef.current === 0 ? 0 : (currentTime - lastFrameTimeRef.current) / 1000;
       timeRef.current += deltaTime * speed;
       lastFrameTimeRef.current = currentTime;
 

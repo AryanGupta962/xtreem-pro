@@ -10,14 +10,6 @@ import BenefitCard from "./BenefitCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SPARKS = Array.from({ length: 40 }, (_, i) => ({
-  id: i,
-  left: `${Math.random() * 100}%`,
-  top: `${Math.random() * 100}%`,
-  size: Math.random() * 6 + 2,
-  duration: Math.random() * 4 + 2,
-}));
-
 export default function DistributorSection() {
   const sectionRef = useRef(null);
 

@@ -792,7 +792,7 @@ export default function PowerSection() {
           className="pt-40 ps-title font-black uppercase tracking-tight text-[#aafc1c]
           text-3xl md:text-5xl lg:text-8xl absolute left-1/2 -translate-x-1/2"
         >
-          {"Benifits".split("").map((ch, i) =>
+          {"Benefits".split("").map((ch, i) =>
             ch === " " ? (
               <span
                 key={i}
