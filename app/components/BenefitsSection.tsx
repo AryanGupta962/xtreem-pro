@@ -515,10 +515,10 @@ function arcPath(
   endDeg: number,
 ): string {
   const toRad = (d: number) => ((d - 90) * Math.PI) / 180;
-  const x1 = cx + r * Math.cos(toRad(startDeg));
-  const y1 = cy + r * Math.sin(toRad(startDeg));
-  const x2 = cx + r * Math.cos(toRad(endDeg));
-  const y2 = cy + r * Math.sin(toRad(endDeg));
+  const x1 = (cx + r * Math.cos(toRad(startDeg))).toFixed(4);
+  const y1 = (cy + r * Math.sin(toRad(startDeg))).toFixed(4);
+  const x2 = (cx + r * Math.cos(toRad(endDeg))).toFixed(4);
+  const y2 = (cy + r * Math.sin(toRad(endDeg))).toFixed(4);
   const large = endDeg - startDeg > 180 ? 1 : 0;
   return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
 }
@@ -1007,13 +1007,17 @@ export default function PowerSection() {
                 const rad = ((angle - 90) * Math.PI) / 180;
                 const r1 = 94,
                   r2 = 97;
+                const x1 = (100 + r1 * Math.cos(rad)).toFixed(4);
+                const y1 = (100 + r1 * Math.sin(rad)).toFixed(4);
+                const x2 = (100 + r2 * Math.cos(rad)).toFixed(4);
+                const y2 = (100 + r2 * Math.sin(rad)).toFixed(4);
                 return (
                   <line
                     key={i}
-                    x1={100 + r1 * Math.cos(rad)}
-                    y1={100 + r1 * Math.sin(rad)}
-                    x2={100 + r2 * Math.cos(rad)}
-                    y2={100 + r2 * Math.sin(rad)}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
                     stroke="rgba(188,224,64,0.12)"
                     strokeWidth="0.5"
                   />
