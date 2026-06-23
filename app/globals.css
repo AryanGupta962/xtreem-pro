@@ -63,3 +63,27 @@ body {
     transform: rotate(360deg);
   }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #d9ff66 0%,
+    #bce040 30%,
+    #8cff00 70%,
+    #6eff00 100%
+  );
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #e4ff8a 0%,
+    #c9f84d 30%,
+    #9dff00 70%,
+    #7fff00 100%
+  );
+}
