@@ -302,7 +302,7 @@ export default function HeroSection() {
               muted loop playsInline preload="none"
               className="absolute inset-0 h-full w-full object-fill object-center"
             >
-              <source src="/videos/rr.webm" type="video/mp4" />
+              <source src="/videos/hero.mp4" type="video/mp4" />
             </video>
           </div>
 

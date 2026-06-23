@@ -78,9 +78,9 @@ export default function CTASection() {
         <motion.div style={{ x }} className="text-center">
           <h2
             className="font-black uppercase italic leading-[0.95]"
-            style={{ fontSize: "clamp(2rem, 10vw, 5rem)" }}
+            style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)" }}
           >
-            <span className="pr-2 block bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
+            <span className="pr-2 block whitespace-nowrap bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
               READY TO UNLEASH
             </span>
 

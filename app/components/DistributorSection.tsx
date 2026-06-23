@@ -69,7 +69,7 @@ export default function DistributorSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-black py-20"
+      className="relative overflow-hidden bg-black py-14 md:py-20"
     >
       {/* Background Branding */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
