@@ -45,15 +45,6 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
     });
   }, []);
 
-  // React to isOpen changes driven by Header
-  useEffect(() => {
-    if (isOpen) {
-      animateOpen();
-    } else {
-      animateClose();
-    }
-  }, [isOpen]);
-
   // Keyboard ESC
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -128,7 +119,16 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
       .to(closeBtnRef.current, { opacity: 0, duration: 0.2 }, 0.1)
       .to(overlay, { opacity: 0, duration: 0.25, ease: "power2.in" }, 0.3);
   };
-  
+
+  // React to isOpen changes driven by Header
+  useEffect(() => {
+    if (isOpen) {
+      animateOpen();
+    } else {
+      animateClose();
+    }
+  }, [isOpen]);
+
   return (
     <div
       ref={overlayRef}
@@ -183,7 +183,7 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
                 text-[#F0F0F0] no-underline leading-none
                 py-2 border-b border-[#1E1E1E]
                 transition-colors duration-300
-                hover:text-[#E8FF00]
+                hover:text-primary-green
                 focus:outline-none focus-visible:text-[#E8FF00]
                 text-3xl
               "
@@ -200,7 +200,7 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
 
               <span
                 className="
-                  text-4xl text-[#E8FF00]
+                  text-4xl text-primary-green
                   translate-x-3 opacity-0
                   group-hover:translate-x-0 group-hover:opacity-100
                   transition-all duration-300 ease-out
