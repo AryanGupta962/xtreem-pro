@@ -67,6 +67,7 @@ export default function EnergyShowcase() {
             muted
             loop
             playsInline
+            preload="none"
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src="/videos/side-hero.mp4" />

@@ -12,6 +12,7 @@ export default function Footer() {
           alt="XTREEM PRO Logo"
           width={1200}
           height={300}
+          sizes="(max-width: 640px) 144px, 200px"
           className="w-full max-w-36 sm:max-w-50 h-auto object-contain"
         />
 

@@ -50,6 +50,8 @@ body {
   );
 
   filter: blur(25px);
+  will-change: transform;
+  transform: translateZ(0);
 
   animation: spin 15s linear infinite;
 }

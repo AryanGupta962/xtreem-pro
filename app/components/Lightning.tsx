@@ -6,14 +6,23 @@ interface ElectricBlastProps {
   armCount?: number;
   speed?: number;
   intensity?: number;
+  /** When false, the rAF loop is paused to save GPU. */
+  visible?: boolean;
 }
 
 const ElectricBlast: React.FC<ElectricBlastProps> = ({
   armCount = 10,
   speed = 1,
   intensity = 1,
+  visible = true,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const visibleRef = useRef(visible);
+
+  // Keep ref in sync with prop so the rAF closure always reads the latest value
+  useEffect(() => {
+    visibleRef.current = visible;
+  }, [visible]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -100,7 +109,7 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
         vec3  col = vec3(0.);
         int   N   = int(uArmCount);
 
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < 15; i++){
           if(i >= N) break;
           float fi = float(i);
 
@@ -166,15 +175,12 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     `;
 
     // ── makeShader: gl is guaranteed non-null here via closure ──
-    // TypeScript sees gl as WebGLRenderingContext (not null) because
-    // we returned early above if it was null.
     const makeShader = (src: string, type: number): WebGLShader | null => {
       const shader = gl.createShader(type);
-      if (!shader) return null; // createShader can return null on OOM
+      if (!shader) return null;
       gl.shaderSource(shader, src);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error("Shader compile error:", gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
         return null;
       }
@@ -184,14 +190,12 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     const vs = makeShader(vertSrc, gl.VERTEX_SHADER);
     const fs = makeShader(fragSrc, gl.FRAGMENT_SHADER);
     if (!vs || !fs) {
-      // clean up whichever one succeeded before bailing
       if (vs) gl.deleteShader(vs);
       if (fs) gl.deleteShader(fs);
       ro.disconnect();
       return;
     }
 
-    // ── Program — createProgram can return null ──
     const prog = gl.createProgram();
     if (!prog) {
       gl.deleteShader(vs);
@@ -203,21 +207,18 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.attachShader(prog, vs);
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
-    // shaders are no longer needed after linking
     gl.detachShader(prog, vs);
     gl.detachShader(prog, fs);
     gl.deleteShader(vs);
     gl.deleteShader(fs);
 
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      console.error("Program link error:", gl.getProgramInfoLog(prog));
       gl.deleteProgram(prog);
       ro.disconnect();
       return;
     }
     gl.useProgram(prog);
 
-    // ── Buffer — createBuffer can return null ──
     const vbo = gl.createBuffer();
     if (!vbo) {
       gl.deleteProgram(prog);
@@ -230,9 +231,7 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
 
     const aPosLoc = gl.getAttribLocation(prog, "aPos");
-    // getAttribLocation returns -1 if not found — guard it
     if (aPosLoc < 0) {
-      console.error("aPos attribute not found in shader");
       gl.deleteBuffer(vbo);
       gl.deleteProgram(prog);
       ro.disconnect();
@@ -241,9 +240,6 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.enableVertexAttribArray(aPosLoc);
     gl.vertexAttribPointer(aPosLoc, 2, gl.FLOAT, false, 0, 0);
 
-    // ── Uniform locations — getUniformLocation returns null if unused/not found.
-    // uniform1f / uniform2f silently no-op on null locations, so no guard needed,
-    // but we type them correctly so TS is happy.
     const uRes = gl.getUniformLocation(prog, "iRes");
     const uTime = gl.getUniformLocation(prog, "iTime");
     const uArms = gl.getUniformLocation(prog, "uArmCount");
@@ -254,9 +250,15 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     const t0 = performance.now();
-    let animId = 0; // initialised so cancelAnimationFrame(0) is safe
+    let animId = 0;
 
     const render = (): void => {
+      // Skip rendering entirely when not visible — saves all GPU work
+      if (!visibleRef.current) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       resize();
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(uRes, canvas.width, canvas.height);
@@ -269,16 +271,13 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     };
     animId = requestAnimationFrame(render);
 
-    // ── Cleanup: runs on unmount or when props change ──
     return () => {
       ro.disconnect();
       cancelAnimationFrame(animId);
-      // Detach state before deleting so drivers can GC immediately
       gl.useProgram(null);
       gl.bindBuffer(gl.ARRAY_BUFFER, null);
       gl.deleteBuffer(vbo);
       gl.deleteProgram(prog);
-      // shaders already deleted after link — no double-free
     };
   }, [armCount, speed, intensity]);
 
@@ -292,4 +291,3 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
 };
 
 export default ElectricBlast;
-

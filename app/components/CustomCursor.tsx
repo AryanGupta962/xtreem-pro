@@ -96,6 +96,13 @@ export default function EnergyDrinkSplashCursor({
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Skip entirely on touch devices — the fluid sim only responds to mouse,
+    // so it's pure GPU waste on mobile/tablet.
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    if (isTouchDevice) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -1015,8 +1022,31 @@ export default function EnergyDrinkSplashCursor({
     let lastUpdateTime = Date.now();
     let colorUpdateTimer = 0.0;
     let animationFrameId: number;
+    let isRunning = false;
+    let idleTimeout: ReturnType<typeof setTimeout> | null = null;
+    const IDLE_MS = 2000; // pause after 2s of no cursor movement
+
+    function startLoop() {
+      if (isRunning) return;
+      isRunning = true;
+      lastUpdateTime = Date.now(); // reset so dt doesn't spike
+      animationFrameId = requestAnimationFrame(updateFrame);
+    }
+
+    function stopLoop() {
+      if (!isRunning) return;
+      isRunning = false;
+      cancelAnimationFrame(animationFrameId);
+    }
+
+    function resetIdleTimer() {
+      if (idleTimeout) clearTimeout(idleTimeout);
+      startLoop();
+      idleTimeout = setTimeout(stopLoop, IDLE_MS);
+    }
 
     function updateFrame() {
+      if (!isRunning) return;
       const dt = calcDeltaTime();
       if (resizeCanvas()) initFramebuffers();
       updateColors(dt);
@@ -1428,6 +1458,7 @@ export default function EnergyDrinkSplashCursor({
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
       const color = generateColor();
+      resetIdleTimer();
       updateFrame();
       if (!pointer) return;
       updatePointerMoveData(pointer, posX, posY, color);
@@ -1435,6 +1466,7 @@ export default function EnergyDrinkSplashCursor({
     }
 
     const handleMouseMove = (e: MouseEvent) => {
+      resetIdleTimer();
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
@@ -1502,7 +1534,8 @@ export default function EnergyDrinkSplashCursor({
     window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      stopLoop();
+      if (idleTimeout) clearTimeout(idleTimeout);
       window.removeEventListener("mousedown", handleMouseDown);
       document.body.removeEventListener("mousemove", handleFirstMouseMove);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -1527,6 +1560,12 @@ export default function EnergyDrinkSplashCursor({
     BACK_COLOR,
     TRANSPARENT,
   ]);
+
+  // On touch devices, render nothing at all
+  const isTouchDevice =
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  if (isTouchDevice) return null;
 
   return (
     <div

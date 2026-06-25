@@ -32,6 +32,9 @@ interface ElectricBorderProps {
   style?: CSSProperties;
 }
 
+// Throttle interval — target ~30fps instead of 60fps for subtle border effect
+const FRAME_INTERVAL = 1000 / 30;
+
 const ElectricBorder: React.FC<ElectricBorderProps> = ({
   children,
   color = "#5227FF",
@@ -46,6 +49,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
   const animationRef = useRef<number | null>(null);
   const timeRef = useRef(0);
   const lastFrameTimeRef = useRef(0);
+  const isVisibleRef = useRef(false);
 
   const random = useCallback((x: number): number => {
     return (Math.sin(x * 12.9898) * 43758.5453) % 1;
@@ -235,7 +239,8 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const octaves = 10;
+    // Reduced from 10 → 4 octaves — visually identical for a subtle border effect
+    const octaves = 4;
     const lacunarity = 1.6;
     const gain = 0.7;
     const amplitude = chaos;
@@ -265,6 +270,19 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     const drawElectricBorder = (currentTime: number) => {
       if (!canvas || !ctx) return;
 
+      // Skip frame if not visible (IntersectionObserver gating)
+      if (!isVisibleRef.current) {
+        animationRef.current = requestAnimationFrame(drawElectricBorder);
+        return;
+      }
+
+      // Throttle to ~30fps
+      const elapsed = currentTime - lastFrameTimeRef.current;
+      if (elapsed < FRAME_INTERVAL) {
+        animationRef.current = requestAnimationFrame(drawElectricBorder);
+        return;
+      }
+
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       if (dpr !== lastDpr) {
         lastDpr = dpr;
@@ -273,7 +291,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
         height = newSize.height;
       }
 
-      const deltaTime = lastFrameTimeRef.current === 0 ? 0 : (currentTime - lastFrameTimeRef.current) / 1000;
+      const deltaTime = lastFrameTimeRef.current === 0 ? 0 : elapsed / 1000;
       timeRef.current += deltaTime * speed;
       lastFrameTimeRef.current = currentTime;
 
@@ -296,7 +314,8 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
 
       const approximatePerimeter =
         2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
-      const sampleCount = Math.floor(approximatePerimeter / 2);
+      // Reduced sample density — every 3px instead of every 2px
+      const sampleCount = Math.floor(approximatePerimeter / 3);
 
       ctx.beginPath();
 
@@ -351,6 +370,17 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
       animationRef.current = requestAnimationFrame(drawElectricBorder);
     };
 
+    // IntersectionObserver — pause animation when offscreen
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          isVisibleRef.current = entry.isIntersecting;
+        }
+      },
+      { rootMargin: "100px" },
+    );
+    observer.observe(container);
+
     const resizeObserver = new ResizeObserver(() => {
       const newSize = updateSize();
       width = newSize.width;
@@ -364,6 +394,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      observer.disconnect();
       resizeObserver.disconnect();
     };
   }, [color, speed, chaos, borderRadius, octavedNoise, getRoundedRectPoint]);

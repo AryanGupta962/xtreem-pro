@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
 import StaggeredMenu from "./StaggeredMenu";
