@@ -366,7 +366,7 @@ export default function HeroSection() {
               loop
               playsInline
               preload="none"
-              className="max-md:hidden absolute inset-0 h-full w-full object-fill object-center"
+              className="max-md:hidden absolute inset-0 min-h-[100dvh] w-full object-fill object-center"
             >
               <source src="/videos/hero.mp4" type="video/mp4" />
             </video>
@@ -379,7 +379,7 @@ export default function HeroSection() {
               preload="none"
               className="md:hidden absolute inset-0 h-full w-full object-fill object-center"
             >
-              <source src="/videos/side-hero-2.mp4" type="video/mp4" />
+              <source src="/videos/mobile-hero-1.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

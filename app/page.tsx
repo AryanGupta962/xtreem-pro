@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import EnergyMarquee from "./components/Marquee";
+import XtreemSlider from "./components/XtreemSlider";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HeroSection />
       <EnergyShowcase />
       <BenefitsSection />
+      <XtreemSlider />
       <DistributorSection />
       <CTASection />
       <EnergyMarquee />

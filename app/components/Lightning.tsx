@@ -17,54 +17,68 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
   visible = true,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Keep live props in refs so the rAF closure always reads the latest values
+  // without triggering a full WebGL teardown/rebuild on every prop change.
+  const armCountRef = useRef(armCount);
+  const speedRef = useRef(speed);
+  const intensityRef = useRef(intensity);
   const visibleRef = useRef(visible);
 
-  // Keep ref in sync with prop so the rAF closure always reads the latest value
-  useEffect(() => {
-    visibleRef.current = visible;
-  }, [visible]);
+  // Sync refs on every render — no extra effects needed.
+  armCountRef.current = armCount;
+  speedRef.current = speed;
+  intensityRef.current = intensity;
+  visibleRef.current = visible;
 
+  // ── WebGL lifetime: runs once, never re-runs for prop changes ──────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // ── resize: only triggers GPU realloc when size actually changes ──
-    let lastW = 0;
-    let lastH = 0;
-    const resize = (): void => {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      if (w !== lastW || h !== lastH) {
+    // ── ResizeObserver writes directly to canvas dimensions ─────────────────
+    // The render loop reads canvas.width/height each frame, so no extra
+    // "dirty" flag is needed — just keep the backing store in sync.
+    let canvasW = 0;
+    let canvasH = 0;
+
+    const syncSize = (): void => {
+      const w = canvas.clientWidth | 0; // fast floor for integer pixels
+      const h = canvas.clientHeight | 0;
+      if (w !== canvasW || h !== canvasH) {
         canvas.width = w;
         canvas.height = h;
-        lastW = w;
-        lastH = h;
+        canvasW = w;
+        canvasH = h;
       }
     };
-    resize();
+    syncSize();
 
-    const ro = new ResizeObserver(resize);
+    const ro = new ResizeObserver(syncSize);
     ro.observe(canvas);
 
-    // ── WebGL context — narrowed to non-null immediately ──
-    const gl: WebGLRenderingContext | null = canvas.getContext("webgl", {
+    // ── WebGL context ────────────────────────────────────────────────────────
+    const gl = canvas.getContext("webgl", {
       alpha: true,
       premultipliedAlpha: false,
       antialias: false,
       powerPreference: "high-performance",
-    });
+      // Hint: we never need to read back pixels
+      preserveDrawingBuffer: false,
+    }) as WebGLRenderingContext | null;
+
     if (!gl) {
       ro.disconnect();
       return;
     }
 
-    /* ── Vertex shader ── */
+    /* ── Vertex shader ────────────────────────────────────────────────────── */
     const vertSrc = `
       attribute vec2 aPos;
       void main(){ gl_Position = vec4(aPos,0.,1.); }
     `;
 
-    /* ── Fragment shader ── */
+    /* ── Fragment shader (visuals unchanged) ─────────────────────────────── */
     const fragSrc = `
       precision mediump float;
       uniform vec2  iRes;
@@ -174,13 +188,14 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
       }
     `;
 
-    // ── makeShader: gl is guaranteed non-null here via closure ──
+    // ── Shader compilation helper ────────────────────────────────────────────
     const makeShader = (src: string, type: number): WebGLShader | null => {
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, src);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
         return null;
       }
@@ -207,28 +222,33 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.attachShader(prog, vs);
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
+    // Shaders can be detached + deleted immediately after linking
     gl.detachShader(prog, vs);
     gl.detachShader(prog, fs);
     gl.deleteShader(vs);
     gl.deleteShader(fs);
 
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.error(gl.getProgramInfoLog(prog));
       gl.deleteProgram(prog);
       ro.disconnect();
       return;
     }
     gl.useProgram(prog);
 
+    // ── Full-screen quad ─────────────────────────────────────────────────────
     const vbo = gl.createBuffer();
     if (!vbo) {
       gl.deleteProgram(prog);
       ro.disconnect();
       return;
     }
-
-    const verts = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-    gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW,
+    );
 
     const aPosLoc = gl.getAttribLocation(prog, "aPos");
     if (aPosLoc < 0) {
@@ -240,38 +260,74 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
     gl.enableVertexAttribArray(aPosLoc);
     gl.vertexAttribPointer(aPosLoc, 2, gl.FLOAT, false, 0, 0);
 
+    // Cache all uniform locations once — never look them up again
     const uRes = gl.getUniformLocation(prog, "iRes");
     const uTime = gl.getUniformLocation(prog, "iTime");
     const uArms = gl.getUniformLocation(prog, "uArmCount");
     const uSpd = gl.getUniformLocation(prog, "uSpeed");
     const uIntens = gl.getUniformLocation(prog, "uIntensity");
 
+    // Blend state set once at init — never touched again in the hot path
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+    // ── Page-visibility API — halts the loop when the tab is backgrounded ───
+    // This is a separate concern from the `visible` prop (which controls
+    // whether the element itself is on-screen) and costs nothing extra.
+    let pageVisible = !document.hidden;
+    const onVisChange = (): void => {
+      pageVisible = !document.hidden;
+    };
+    document.addEventListener("visibilitychange", onVisChange);
+
+    // ── Cached viewport — only call gl.viewport when dimensions change ───────
+    let vpW = 0;
+    let vpH = 0;
+
+    // ── Cached resolution uniform — only upload when dimensions change ───────
+    let resW = 0;
+    let resH = 0;
 
     const t0 = performance.now();
     let animId = 0;
 
     const render = (): void => {
-      // Skip rendering entirely when not visible — saves all GPU work
-      if (!visibleRef.current) {
-        animId = requestAnimationFrame(render);
-        return;
+      animId = requestAnimationFrame(render);
+
+      // Bail out entirely when the tab is hidden or the component is invisible.
+      // requestAnimationFrame still ticks (to stay queued), but we skip all
+      // GL work — no uniform uploads, no draw calls, no driver round-trips.
+      if (!pageVisible || !visibleRef.current) return;
+
+      // Viewport update — only when the canvas backing store was resized
+      const w = canvasW;
+      const h = canvasH;
+      if (w !== vpW || h !== vpH) {
+        gl.viewport(0, 0, w, h);
+        vpW = w;
+        vpH = h;
       }
 
-      resize();
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
+      // Resolution uniform — only when dimensions actually changed
+      if (w !== resW || h !== resH) {
+        gl.uniform2f(uRes, w, h);
+        resW = w;
+        resH = h;
+      }
+
+      // These three uniforms change every frame — upload them unconditionally
       gl.uniform1f(uTime, (performance.now() - t0) / 1000);
-      gl.uniform1f(uArms, armCount);
-      gl.uniform1f(uSpd, speed);
-      gl.uniform1f(uIntens, intensity);
+      gl.uniform1f(uArms, armCountRef.current);
+      gl.uniform1f(uSpd, speedRef.current);
+      gl.uniform1f(uIntens, intensityRef.current);
+
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-      animId = requestAnimationFrame(render);
     };
+
     animId = requestAnimationFrame(render);
 
     return () => {
+      document.removeEventListener("visibilitychange", onVisChange);
       ro.disconnect();
       cancelAnimationFrame(animId);
       gl.useProgram(null);
@@ -279,7 +335,11 @@ const ElectricBlast: React.FC<ElectricBlastProps> = ({
       gl.deleteBuffer(vbo);
       gl.deleteProgram(prog);
     };
-  }, [armCount, speed, intensity]);
+    // Intentionally empty dep array — all prop values flow through refs.
+    // This prevents WebGL teardown/rebuild whenever armCount/speed/intensity
+    // or visible changes, which was the original source of jank on prop updates.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <canvas

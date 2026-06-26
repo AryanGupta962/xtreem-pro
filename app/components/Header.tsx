@@ -69,6 +69,7 @@ export default function Header() {
                 fill
                 priority
                 sizes="144px"
+                loading="eager"
                 className="object-contain"
               />
             </div>

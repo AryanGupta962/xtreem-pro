@@ -358,7 +358,10 @@ export default function PowerSection() {
                 &nbsp;
               </span>
             ) : (
-              <span key={i} className="ps-letter inline-block opacity-0">
+              <span
+                key={i}
+                className={`ps-letter inline-block opacity-0 ${i < 4 && "text-white"}`}
+              >
                 {ch}
               </span>
             ),
