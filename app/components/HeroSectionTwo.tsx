@@ -1,0 +1,398 @@
+"use client";
+
+import React, { useRef, useState } from "react";
+import type { IconType } from "react-icons";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import ElectricBlast from "./Lightning";
+import Image from "next/image";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ─────────────────────────────────────────────
+// USP ICON TILE — More premium version
+// ─────────────────────────────────────────────
+const UspIconTile: React.FC<{ Icon: IconType }> = ({ Icon }) => (
+  <div
+    className="relative flex h-16 w-16 shrink-0 items-center justify-center"
+    style={{
+      clipPath: "polygon(25% 8%, 75% 8%, 100% 50%, 75% 92%, 25% 92%, 0% 50%)",
+      background:
+        "linear-gradient(145deg, rgba(220,255,120,0.12) 0%, rgba(40,40,40,0.85) 45%, rgba(10,10,10,0.95) 100%)",
+      border: "1px solid rgba(200,255,100,0.45)",
+      boxShadow:
+        "0 0 28px rgba(190,255,80,0.18), inset 0 0 18px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.6)",
+    }}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[inherit]" />
+    <Icon className="h-8 w-8 text-lime-300 drop-shadow-[0_0_12px_rgba(220,255,120,0.9)]" />
+  </div>
+);
+
+// ─────────────────────────────────────────────
+// USP CARD — Premium & Classy redesign
+// ─────────────────────────────────────────────
+const UspCard: React.FC<{
+  Icon: IconType;
+  title: string;
+  subtitle?: string;
+}> = ({ Icon, title, subtitle }) => (
+  <div
+    className="usp-card group relative flex flex-col items-center gap-5 rounded-2xl
+                bg-gradient-to-b from-white/[0.06] via-black/60 to-black/80 p-8
+                backdrop-blur-xl border border-white/10 hover:border-lime-400/50
+                transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-lime-400/10"
+    style={{ opacity: 0, transform: "translateY(40px)" }}
+  >
+    <UspIconTile Icon={Icon} />
+
+    <div className="text-center">
+      <h3 className="mb-2 text-lg font-black uppercase tracking-[0.04em] text-white">
+        {title}
+      </h3>
+      {subtitle && (
+        <p className="text-sm leading-tight text-white/60 font-light tracking-wide">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    {/* Subtle bottom accent line */}
+    <div className="absolute bottom-4 h-px w-12 bg-gradient-to-r from-transparent via-lime-400/60 to-transparent" />
+  </div>
+);
+
+// ─────────────────────────────────────────────
+// MAIN HERO SECTION
+// ─────────────────────────────────────────────
+export default function HeroSection() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const slide1Ref = useRef<HTMLDivElement>(null);
+  const slide2Ref = useRef<HTMLDivElement>(null);
+  const slide3Ref = useRef<HTMLDivElement>(null);
+  const trackingRef = useRef<HTMLVideoElement>(null);
+  const heroVidDesktopRef = useRef<HTMLVideoElement>(null);
+  const heroVidMobileRef = useRef<HTMLVideoElement>(null);
+
+  // C3: Control Lightning visibility based on scroll position
+  const [lightningVisible, setLightningVisible] = useState(false);
+
+  useGSAP(
+    () => {
+      const wrapper = wrapperRef.current;
+      const s1 = slide1Ref.current;
+      const s2 = slide2Ref.current;
+      const s3 = slide3Ref.current;
+      if (!wrapper || !s1 || !s2 || !s3) return;
+
+      gsap.set(s2, { y: 60 });
+      gsap.set(s3, { opacity: 0, y: 60 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const p = self.progress;
+            const tvDesktop = heroVidDesktopRef.current;
+            const tvMobile = heroVidMobileRef.current;
+            const hv = trackingRef.current;
+
+            // C3: Lightning should only render when slide 2 is visible
+            const slide2Visible = p >= 0.12 && p < 0.55;
+            setLightningVisible(slide2Visible);
+
+            if (p < 0.4) {
+              hv?.paused && hv.play().catch(() => {});
+              if (tvDesktop && !tvDesktop.paused) tvDesktop.pause();
+              if (tvMobile && !tvMobile.paused) tvMobile.pause();
+            } else if (p < 0.65) {
+              if (hv && !hv.paused) hv.pause();
+              if (tvDesktop && !tvDesktop.paused) tvDesktop.pause();
+              if (tvMobile && !tvMobile.paused) tvMobile.pause();
+            } else {
+              if (hv && !hv.paused) hv.pause();
+              tvDesktop?.paused && tvDesktop.play().catch(() => {});
+              tvMobile?.paused && tvMobile.play().catch(() => {});
+            }
+          },
+        },
+      });
+
+      tl.to(
+        s1,
+        { opacity: 0, y: -50, scale: 0.97, duration: 0.2, ease: "power2.in" },
+        0,
+      )
+        .to(s2, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.15)
+        .to(
+          s2,
+          { opacity: 0, y: -50, scale: 0.97, duration: 0.2, ease: "power2.in" },
+          0.5,
+        )
+        .to(s3, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.65);
+
+      const uspCards = s2.querySelectorAll<HTMLElement>(".usp-card");
+
+      ScrollTrigger.create({
+        trigger: wrapper,
+        start: "35% top",
+        end: "65% top",
+        onEnter: () =>
+          gsap.to(uspCards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "power3.out",
+          }),
+        onLeaveBack: () => gsap.set(uspCards, { opacity: 0, y: 40 }),
+      });
+    },
+    { scope: wrapperRef },
+  );
+
+  // Start the tracking video on mount
+  useGSAP(
+    () => {
+      trackingRef.current?.play().catch(() => {});
+    },
+    { scope: wrapperRef },
+  );
+
+  return (
+    <>
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollBounce {
+          0%,100% { transform: translateY(0); }
+          50%     { transform: translateY(10px); }
+        }
+        @keyframes shimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
+        .animate-fadeInUp     { animation: fadeInUp 0.9s ease forwards; }
+        .animate-scrollBounce { animation: scrollBounce 1.6s ease-in-out infinite; }
+
+        .text-shimmer {
+          background: linear-gradient(90deg, #d4ff4d 15%, #ffffff 50%, #d4ff4d 85%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shimmer 3.5s linear infinite;
+        }
+      `}</style>
+
+      <div
+        ref={wrapperRef}
+        className="relative bg-black"
+        style={{ height: "300vh", zIndex: 10 }}
+      >
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          {/* SLIDE 1 — unchanged */}
+          <div
+            ref={slide1Ref}
+            className="absolute inset-0 flex items-end justify-center pb-10 px-6"
+            style={{ zIndex: 1 }}
+          >
+            {/* ... existing slide 1 content ... */}
+            <video
+              ref={trackingRef}
+              muted
+              loop
+              playsInline
+              autoPlay
+              preload="metadata"
+              className="absolute inset-0 h-full w-full object-cover"
+            >
+              <source src="/videos/tracking-2.mp4" type="video/mp4" />
+            </video>
+
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 40%, transparent 60%, rgba(0,0,0,0.25) 100%)",
+              }}
+            />
+
+            <div className="relative z-10 flex flex-col items-center">
+              <div
+                className="mb-3 text-center text-[11px] font-bold uppercase tracking-[0.35em] text-white/60 opacity-0 animate-fadeInUp"
+                style={{
+                  animationDelay: "300ms",
+                  animationFillMode: "forwards",
+                }}
+              >
+                Charged. Clean. Unstoppable.
+              </div>
+
+              <h1
+                className="text-center uppercase font-black leading-[0.95] mb-6 opacity-0 animate-fadeInUp"
+                style={{
+                  animationDelay: "450ms",
+                  animationFillMode: "forwards",
+                  fontSize: "clamp(2.6rem, 9vw, 4rem)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                <span className="text-shimmer">Premium Energy</span>
+              </h1>
+
+              <div
+                className="flex flex-col items-center opacity-0 animate-fadeInUp"
+                style={{
+                  animationDelay: "800ms",
+                  animationFillMode: "forwards",
+                }}
+              >
+                <span className="mb-2 text-[10px] uppercase tracking-[0.3em] text-white/50">
+                  Scroll to explore
+                </span>
+                <div className="h-9 w-5 rounded-full border border-lime-400/40 p-1">
+                  <div className="h-1.5 w-1.5 animate-scrollBounce rounded-full bg-lime-400 shadow-[0_0_6px_rgba(190,255,0,0.9)]" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── SLIDE 2 — ELECTRICITY CHARGING THE CAN ── */}
+          <div
+            ref={slide2Ref}
+            className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden"
+            style={{ zIndex: 2, opacity: 0 }}
+          >
+            {/* Background */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `
+        radial-gradient(circle at 50% 35%, rgba(100, 255, 70, 0.18) 0%, transparent 65%),
+        linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(5,10,5,0.99) 100%)
+      `,
+              }}
+            />
+
+            {/* Lightning Effects — C3: visibility-gated */}
+            <div className="absolute inset-0 pointer-events-none">
+              <ElectricBlast
+                armCount={15}
+                speed={0.2}
+                intensity={2}
+                visible={lightningVisible}
+              />
+            </div>
+
+            {/* Main Product Can */}
+            <div className="relative z-20 flex justify-center flex-shrink-0">
+              <div className="relative group">
+                {/* Glow — clamped so it never bleeds on mobile */}
+                <div
+                  className="absolute rounded-full bg-lime-400/20 blur-[60px] sm:blur-[100px] animate-pulse"
+                  style={{ inset: "-3rem" }}
+                />
+                <div
+                  className="absolute rounded-full bg-lime-400/28 blur-2xl sm:blur-3xl animate-pulse"
+                  style={{ inset: "-1rem", animationDuration: "2.4s" }}
+                />
+
+                {/* Can — fluid height that shrinks on small screens */}
+                <div
+                  className="relative w-[160px] sm:w-[190px] md:w-[220px]"
+                  style={{ height: "clamp(260px, 48vh, 500px)" }}
+                >
+                  <Image
+                    src="/images/can.png"
+                    alt="Premium Energy Drink Can"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
+                    className="object-contain transition-all duration-1000 group-hover:scale-[1.04]"
+                    style={{
+                      filter: `
+              drop-shadow(0 0 50px rgba(190, 255, 110, 0.85))
+              drop-shadow(0 0 90px rgba(160, 255, 80, 0.55))
+            `,
+                    }}
+                  />
+                </div>
+
+                {/* Core pulse */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 bg-lime-400 rounded-full blur-xl animate-pulse" />
+              </div>
+            </div>
+
+            {/* Text Content — gap scales with viewport so nothing overflows */}
+            <div className="relative z-30 text-center mt-4 sm:mt-8 md:mt-12 px-2">
+              <h2
+                className="font-black text-white leading-none tracking-tight"
+                style={{ fontSize: "clamp(1.8rem, 6vw, 5rem)" }}
+              >
+                ENERGY DRINK
+                <br />
+                <span className="bg-gradient-to-r from-primary-green via-white to-primary-green bg-clip-text text-transparent">
+                  WITH NATURAL CAFFEINE
+                </span>
+              </h2>
+
+              <p className="mt-3 sm:mt-6 text-white/80 max-w-sm sm:max-w-md mx-auto text-sm sm:text-base md:text-lg leading-snug">
+                75mg Pure Power • Zero Crash • 18 Months Shelf Life
+              </p>
+            </div>
+
+            {/* Bottom Tagline — hidden on very short screens to avoid overlap */}
+            <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 hidden xs:block text-[10px] sm:text-xs uppercase tracking-[3px] text-white/50 font-medium z-30">
+              ELECTRIC • CLEAN • UNSTOPPABLE
+            </div>
+          </div>
+
+          {/* SLIDE 3 — H3: separate refs for desktop and mobile videos */}
+          <div
+            ref={slide3Ref}
+            className="absolute inset-0"
+            style={{ zIndex: 3, opacity: 0 }}
+          >
+            <video
+              ref={heroVidDesktopRef}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="max-md:hidden absolute inset-0 min-h-[100dvh] w-full object-fill object-center"
+            >
+              <source src="/videos/hero.mp4" type="video/mp4" />
+            </video>
+
+            <video
+              ref={heroVidMobileRef}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="md:hidden absolute inset-0 h-full w-full object-fill object-center"
+            >
+              <source src="/videos/mobile-hero-1.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+ 
