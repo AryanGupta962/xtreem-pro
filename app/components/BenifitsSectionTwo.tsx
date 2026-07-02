@@ -1,56 +1,145 @@
-"use client";
+﻿"use client";
 
-import { useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import ElectricBorder from "./ElectricBorder";
-import ProductCan from "./ProductCan";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Data ─────────────────────────────────────────────────────────── */
-const INGREDIENTS = [
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+type Benefit = {
+  threshold: number;
+  spec: string;
+  side: "left" | "right";
+  title: string;
+  desc: string;
+  icon: ReactNode;
+};
+
+const BENEFITS: Benefit[] = [
   {
-    id: 0,
-    code: "B-VITS",
-    title: "B-VITAMINS",
-    subtitle: "RECOVER",
-    label: "B2 · B3 · B6 · B12",
-    stat: "4",
-    statUnit: "Vitamins",
-    desc: "The full B-complex fuels every cell's energy factory. From ATP synthesis to nerve signal speed — this is where recovery starts.",
-    tags: ["Metabolism", "Recovery", "Cell Repair"],
-    color: "#aafc1c",
+    threshold: 8,
+    spec: "75MG",
+    side: "left",
+    title: "Precision Energy,\nZero Crash",
+    desc: "Natural caffeine. Smooth boost, no jitters.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <path
+          d="M26 4 10 28h10l-2 16 18-26H26l2-14Z"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
   },
   {
-    id: 1,
-    code: "TAUR",
-    title: "TAURINE",
-    subtitle: "ENDURE",
-    label: "Amino Acid",
-    stat: "↑",
-    statUnit: "Endurance",
-    desc: "The most abundant amino acid in muscle tissue. Taurine delays fatigue, protects cells under stress, and keeps output high when others fade.",
-    tags: ["Stamina", "Anti-Fatigue", "Muscle"],
-    color: "#aafc1c",
+    threshold: 24,
+    spec: "B2·B3·B6·B12",
+    side: "right",
+    title: "The Ultimate\nPower Matrix",
+    desc: "High-performance B-vitamin complex.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="4" fill="currentColor" />
+        <circle cx="24" cy="8" r="3.5" fill="currentColor" />
+        <circle cx="38" cy="16" r="3.5" fill="currentColor" />
+        <circle cx="38" cy="32" r="3.5" fill="currentColor" />
+        <circle cx="24" cy="40" r="3.5" fill="currentColor" />
+        <circle cx="10" cy="32" r="3.5" fill="currentColor" />
+        <circle cx="10" cy="16" r="3.5" fill="currentColor" />
+        <path
+          d="M24 24 24 8M24 24 38 16M24 24 38 32M24 24 24 40M24 24 10 32M24 24 10 16"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+      </svg>
+    ),
   },
   {
-    id: 2,
-    code: "CAFF",
-    title: "CAFFEINE",
-    subtitle: "IGNITE",
-    label: "Natural Source",
-    stat: "75",
-    statUnit: "mg / can",
-    desc: "Not synthetic. Naturally sourced caffeine hits faster, burns cleaner, and exits without the wall-crash that synthetic alternatives cause.",
-    tags: ["Natural", "Focus", "No Crash"],
-    color: "#aafc1c",
+    threshold: 41,
+    spec: "TAURINE+",
+    side: "left",
+    title: "Wired for\nPeak Endurance",
+    desc: "Taurine-infused for sharper reflexes and stamina.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <path
+          d="M8 38c8-2 10-10 10-16s4-12 10-14c-2 6 0 10 4 12s8 2 8 10-6 12-14 12-14-2-18-4Z"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    threshold: 58,
+    spec: "0% SYNTH",
+    side: "right",
+    title: "100% Clean\nFormulation",
+    desc: "Lab-certified. Zero synthetic colors.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <path
+          d="M24 6 40 14v12c0 11-7 17-16 20-9-3-16-9-16-20V14l16-8Z"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M17 24l5 5 9-11"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    threshold: 75,
+    spec: "REAL CARBS",
+    side: "left",
+    title: "Real Fuel,\nNo Fakes",
+    desc: "Hard-hitting carbohydrate energy, nothing synthetic.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <path
+          d="M10 30h28M10 30c0-8 6-18 14-18s14 10 14 18M10 30v4a4 4 0 0 0 4 4h20a4 4 0 0 0 4-4v-4"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    threshold: 92,
+    spec: "0PPM METALS",
+    side: "right",
+    title: "Certified\nPristine",
+    desc: "Rigorously lab-tested. Zero heavy metals detected.",
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none">
+        <path
+          d="M24 4v6M24 38v6M4 24h6M38 24h6M9.5 9.5l4.2 4.2M34.3 34.3l4.2 4.2M9.5 38.5l4.2-4.2M34.3 13.7l4.2-4.2"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <circle cx="24" cy="24" r="8" stroke="currentColor" strokeWidth="2.5" />
+      </svg>
+    ),
   },
 ];
 
-/* ─── SVG arc helper ────────────────────────────────────────────────── */
+/* â”€â”€â”€ SVG arc helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 // Returns SVG arc path for a segment of a donut (cx, cy, r, startDeg, endDeg)
 function arcPath(
   cx: number,
@@ -88,17 +177,18 @@ const PARTICLES = [
   { x: "13%", y: "39%", s: 2 },
 ];
 
-/* ─── Component ─────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function PowerSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [chargePct, setChargePct] = useState(0);
   const prevIndexRef = useRef(0);
 
   useGSAP(
     () => {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
-      /* ── ambient ── */
+      /* â”€â”€ ambient â”€â”€ */
       gsap.to(".arc-outer-ring", {
         rotate: 360,
         duration: 22,
@@ -128,7 +218,7 @@ export default function PowerSection() {
         stagger: { each: 0.28, from: "random" },
       });
 
-      /* ── title entrance ── */
+      /* â”€â”€ title entrance â”€â”€ */
       ScrollTrigger.create({
         trigger: ".ps-title",
         start: "top 82%",
@@ -147,7 +237,7 @@ export default function PowerSection() {
         },
       });
 
-      /* ── initial states ── */
+      /* â”€â”€ initial states â”€â”€ */
       gsap.set(".can-img", {
         x: isMobile ? -28 : -90,
         rotate: isMobile ? -8 : -15,
@@ -160,7 +250,7 @@ export default function PowerSection() {
       gsap.set(".arc-seg-0", { strokeDashoffset: 0, opacity: 1 });
       gsap.set(".progress-fill", { height: "0%" });
 
-      /* ── main pinned timeline ── */
+      /* â”€â”€ main pinned timeline â”€â”€ */
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -169,10 +259,14 @@ export default function PowerSection() {
           scrub: 0.6,
           pin: true,
           onUpdate: (self) => {
-            // drive active card state from scroll progress
-            const idx = Math.min(
-              INGREDIENTS.length - 1,
-              Math.floor(self.progress * INGREDIENTS.length),
+            const pct = Math.round(self.progress * 100);
+            setChargePct(pct);
+
+            // Drive active card state from charge thresholds.
+            const idx = BENEFITS.reduce(
+              (current, benefit, index) =>
+                pct >= benefit.threshold ? index : current,
+              0,
             );
             if (idx !== prevIndexRef.current) {
               prevIndexRef.current = idx;
@@ -186,19 +280,25 @@ export default function PowerSection() {
 
       const canPositions = isMobile
         ? [
-            { x: -28, rotate: -8 }, // B-Vitamins
-            { x: 0, rotate: 0 }, // Taurine
-            { x: 28, rotate: 8 }, // Caffeine
+            { x: -30, rotate: -9 },
+            { x: -18, rotate: -5 },
+            { x: -6, rotate: -2 },
+            { x: 6, rotate: 2 },
+            { x: 18, rotate: 5 },
+            { x: 30, rotate: 9 },
           ]
         : [
-            { x: -90, rotate: -15 }, // B-Vitamins
-            { x: 0, rotate: 0 }, // Taurine
-            { x: 90, rotate: 15 }, // Caffeine
+            { x: -110, rotate: -16 },
+            { x: -66, rotate: -10 },
+            { x: -22, rotate: -4 },
+            { x: 22, rotate: 4 },
+            { x: 66, rotate: 10 },
+            { x: 110, rotate: 16 },
           ];
 
-      INGREDIENTS.forEach((_, i) => {
+      BENEFITS.forEach((_, i) => {
         const isFirst = i === 0;
-        const isLast = i === INGREDIENTS.length - 1;
+        const isLast = i === BENEFITS.length - 1;
 
         /* card + detail slide in */
         if (!isFirst) {
@@ -260,19 +360,19 @@ export default function PowerSection() {
         { scale: 3.5, opacity: 0, duration: 1.0 },
         "<0.15",
       );
-      // .charge-complete element removed — animation target cleaned up
+      // .charge-complete element removed â€” animation target cleaned up
     },
     { scope: sectionRef },
   );
 
-  const active = INGREDIENTS[activeIndex];
+  const active = BENEFITS[activeIndex];
 
   return (
     <section
       ref={sectionRef}
       className="relative h-[100svh] min-h-[600px] overflow-hidden bg-black select-none md:h-screen md:min-h-0"
     >
-      {/* ─── Deep BG glows ─── */}
+      {/* â”€â”€â”€ Deep BG glows â”€â”€â”€ */}
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#aafc1c]/[.07] blur-[220px]"
@@ -284,7 +384,7 @@ export default function PowerSection() {
         />
       </div>
 
-      {/* ─── Grid texture ─── */}
+      {/* â”€â”€â”€ Grid texture â”€â”€â”€ */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.018]"
         style={{
@@ -294,7 +394,7 @@ export default function PowerSection() {
         }}
       />
 
-      {/* ─── Scanlines ─── */}
+      {/* â”€â”€â”€ Scanlines â”€â”€â”€ */}
       {[...Array(8)].map((_, i) => (
         <div
           key={i}
@@ -310,7 +410,7 @@ export default function PowerSection() {
         />
       ))}
 
-      {/* ─── Particles ─── */}
+      {/* â”€â”€â”€ Particles â”€â”€â”€ */}
       <div className="pointer-events-none absolute inset-0">
         {PARTICLES.map((p, i) => (
           <div
@@ -321,7 +421,7 @@ export default function PowerSection() {
         ))}
       </div>
 
-      {/* ─── Corner brackets ─── */}
+      {/* â”€â”€â”€ Corner brackets â”€â”€â”€ */}
       {[
         "top-5 left-5 border-t-2 border-l-2",
         "top-5 right-5 border-t-2 border-r-2",
@@ -334,7 +434,7 @@ export default function PowerSection() {
         />
       ))}
 
-      {/* ─── HUD top bar ─── */}
+      {/* â”€â”€â”€ HUD top bar â”€â”€â”€ */}
       <div className="absolute top-0 left-0 right-0 z-40 flex items-start justify-between px-4 pt-4 md:px-10 md:pt-7">
         {/* Left: section label */}
         <div className="flex items-center gap-3">
@@ -374,7 +474,7 @@ export default function PowerSection() {
             Charge
           </span>
           <div className="flex gap-1">
-            {INGREDIENTS.map((_, i) => (
+            {BENEFITS.map((_, i) => (
               <div
                 key={i}
                 className="h-3 w-1.5 rounded-sm transition-all duration-500"
@@ -390,11 +490,11 @@ export default function PowerSection() {
         </div>
       </div>
 
-      {/* ────────────────────────────────────────────────────────────────
+      {/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
           MAIN 3-COLUMN LAYOUT
-      ──────────────────────────────────────────────────────────────── */}
+      â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <div className="absolute inset-0 flex flex-col items-stretch pt-[8.5rem] pb-[10.75rem] sm:pb-[11.75rem] md:flex-row md:pt-16 md:pb-0">
-        {/* ══ COL 1 — Ingredient cards (left) ══ */}
+        {/* â•â• COL 1 â€” Ingredient cards (left) â•â• */}
 
         <div
           className="
@@ -416,103 +516,25 @@ export default function PowerSection() {
             />
           </div>
 
-          {INGREDIENTS.map((ing, i) => (
+          {BENEFITS.map((benefit, i) => (
             <ElectricBorder
-              key={ing.id}
+              key={benefit.title}
               color="#BCE040"
-              speed={1.2}
-              chaos={0.08}
-              borderRadius={1}
+              speed={1.1}
+              chaos={0.07}
+              borderRadius={8}
               className="w-full"
             >
-              <div
-                className={`ing-card ing-card-${i}
-                relative flex-shrink-0
-                flex md:flex items-center gap-3 md:gap-4
-                px-3 py-2.5 md:px-5 md:py-4
-                border transition-all duration-300 cursor-default
-                min-w-[150px] sm:min-w-[180px] md:min-w-0
-              `}
-                style={{
-                  background:
-                    i === activeIndex
-                      ? "rgba(188,224,64,0.08)"
-                      : "rgba(255,255,255,0.02)",
-                  borderColor:
-                    i === activeIndex
-                      ? "rgba(188,224,64,0.4)"
-                      : "rgba(255,255,255,0.06)",
-                  boxShadow:
-                    i === activeIndex
-                      ? "inset 0 0 20px rgba(188,224,64,0.05), 0 0 20px rgba(188,224,64,0.08)"
-                      : "none",
-                }}
-              >
-                {/* Active indicator bar */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500"
-                  style={{
-                    background: i === activeIndex ? "#aafc1c" : "transparent",
-                    boxShadow:
-                      i === activeIndex
-                        ? "0 0 10px rgba(188,224,64,0.9)"
-                        : "none",
-                  }}
-                />
-
-                {/* Code */}
-                <span
-                  className="font-black text-[10px] md:text-[11px] tracking-[0.2em] uppercase w-10 md:w-12 flex-shrink-0"
-                  style={{
-                    color:
-                      i === activeIndex ? "#aafc1c" : "rgba(188,224,64,0.25)",
-                  }}
-                >
-                  {ing.code}
-                </span>
-
-                {/* Title + sub */}
-                <div className="min-w-0">
-                  <div
-                    className="font-black uppercase text-xs leading-none sm:text-sm md:text-base"
-                    style={{
-                      color:
-                        i === activeIndex ? "#fff" : "rgba(255,255,255,0.22)",
-                    }}
-                  >
-                    {ing.title}
-                  </div>
-                  <div
-                    className="text-[9px] md:text-[10px] tracking-[0.25em] uppercase mt-0.5"
-                    style={{
-                      color:
-                        i === activeIndex
-                          ? "rgba(188,224,64,0.6)"
-                          : "rgba(255,255,255,0.15)",
-                    }}
-                  >
-                    {ing.subtitle}
-                  </div>
-                </div>
-
-                {/* Index */}
-                <div
-                  className="ml-auto font-black text-xl md:text-2xl leading-none flex-shrink-0"
-                  style={{
-                    color:
-                      i === activeIndex
-                        ? "rgba(188,224,64,0.2)"
-                        : "rgba(255,255,255,0.05)",
-                  }}
-                >
-                  {i + 1}
-                </div>
-              </div>
+              <BenefitUnlockCard
+                benefit={benefit}
+                index={i}
+                active={i === activeIndex}
+              />
             </ElectricBorder>
           ))}
         </div>
 
-        {/* ══ COL 2 — Can + charging ring (center) ══ */}
+        {/* â•â• COL 2 â€” Can + charging ring (center) â•â• */}
         <div
           className="
           relative z-20
@@ -545,11 +567,12 @@ export default function PowerSection() {
                 stroke="rgba(188,224,64,0.06)"
                 strokeWidth="1"
               />
-              {/* 4 arc segments, each ~80° with 10° gap */}
-              {INGREDIENTS.map((_, i) => {
-                const gapDeg = 9;
-                const segDeg = 81;
-                const start = i * 90 + gapDeg / 2;
+              {/* Benefit charge segments */}
+              {BENEFITS.map((_, i) => {
+                const slice = 360 / BENEFITS.length;
+                const gapDeg = 7;
+                const segDeg = slice - gapDeg;
+                const start = i * slice + gapDeg / 2;
                 const end = start + segDeg;
                 return (
                   <path
@@ -652,7 +675,7 @@ export default function PowerSection() {
             sizes="(max-width: 768px) 270px, 340px"
             className="can-img relative z-10 object-contain will-change-transform"
             style={{
-              height: "clamp(270px, 32vw, 340px)",
+              height: "clamp(280px, 30vw, 400px)",
               width: "auto",
               filter: "drop-shadow(0 0 55px rgba(188,224,64,0.38))",
             }}
@@ -660,7 +683,7 @@ export default function PowerSection() {
 
           {/* Mobile mini tags row */}
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-2 md:hidden z-30">
-            {active.tags.map((t) => (
+            {[active.spec, `${active.threshold}%`, active.side].map((t) => (
               <span
                 key={t}
                 className="px-2 py-1 tracking-[0.1em] uppercase font-bold text-[#aafc1c] border border-[#aafc1c]/50 rounded-sm whitespace-nowrap text-[10px] shadow-md"
@@ -672,7 +695,7 @@ export default function PowerSection() {
           </div>
         </div>
 
-        {/* ══ COL 3 — Detail panels (right) ══ */}
+        {/* â•â• COL 3 â€” Detail panels (right) â•â• */}
         <div
           className="
           relative z-30
@@ -681,9 +704,9 @@ export default function PowerSection() {
           md:pr-10 lg:pr-16
         "
         >
-          {INGREDIENTS.map((ing, i) => (
+          {BENEFITS.map((ing, i) => (
             <div
-              key={ing.id}
+              key={ing.title}
               className={`detail-panel detail-panel-${i} absolute inset-0 flex flex-col justify-center pr-10 lg:pr-16`}
               style={{ opacity: i === 0 ? 1 : 0 }}
             >
@@ -697,7 +720,7 @@ export default function PowerSection() {
                   letterSpacing: "-0.04em",
                 }}
               >
-                {ing.subtitle}
+                {ing.spec}
               </div>
 
               {/* Green rule */}
@@ -718,7 +741,7 @@ export default function PowerSection() {
               <div className="mt-3 inline-flex items-center gap-2 self-start">
                 <div className="h-px w-5 bg-[#aafc1c]/50" />
                 <span className="text-[10px] tracking-[0.28em] uppercase text-[#aafc1c]/65 font-semibold">
-                  {ing.label}
+                  {ing.side === "left" ? "left channel" : "right channel"} / unlock {ing.threshold}%
                 </span>
               </div>
 
@@ -728,16 +751,16 @@ export default function PowerSection() {
                   className="font-black text-[#aafc1c] leading-none"
                   style={{
                     fontSize:
-                      ing.stat.length > 3
+                      ing.spec.length > 5
                         ? "clamp(40px,6vw,72px)"
                         : "clamp(56px,8vw,96px)",
                     textShadow: "0 0 40px rgba(188,224,64,0.45)",
                   }}
                 >
-                  {ing.stat}
+                  {ing.spec}
                 </span>
                 <span className="text-xs tracking-[0.2em] uppercase text-white/30 font-medium">
-                  {ing.statUnit}
+                  charge {ing.threshold}%
                 </span>
               </div>
 
@@ -748,7 +771,7 @@ export default function PowerSection() {
 
               {/* Tags */}
               <div className="mt-6 flex flex-wrap gap-2">
-                {ing.tags.map((tag) => (
+                {[ing.spec, `${ing.threshold}%`, ing.side].map((tag) => (
                   <span
                     key={tag}
                     className="px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-[#aafc1c] rounded-sm"
@@ -786,16 +809,16 @@ export default function PowerSection() {
         </div>
       </div>
 
-      {/* ─── Mobile detail strip (bottom) ─── */}
+      {/* â”€â”€â”€ Mobile detail strip (bottom) â”€â”€â”€ */}
       <div className="absolute bottom-0 left-0 right-0 z-30 md:hidden px-4 pb-5 sm:px-5">
-        {INGREDIENTS.map((ing, i) => (
+        {BENEFITS.map((ing, i) => (
           <div
-            key={ing.id}
+            key={ing.title}
             className={`detail-panel detail-panel-${i} absolute inset-x-4 bottom-5 rounded-xl border border-[#aafc1c]/15 bg-black/55 shadow-[0_0_30px_rgba(170,252,28,0.08)] backdrop-blur-sm sm:inset-x-5`}
             style={{ opacity: i === 0 ? 1 : 0 }}
           >
             <ElectricBorder
-              key={ing.id}
+              key={ing.title}
               color="#BCE040"
               speed={1.2}
               chaos={0.08}
@@ -820,10 +843,10 @@ export default function PowerSection() {
                     className="font-black text-[#aafc1c] leading-none text-4xl"
                     style={{ textShadow: "0 0 30px rgba(188,224,64,0.5)" }}
                   >
-                    {ing.stat}
+                    {ing.spec}
                   </div>
                   <div className="text-[9px] tracking-[0.2em] uppercase text-white/25 mt-1">
-                    {ing.statUnit}
+                    {ing.threshold}% unlock
                   </div>
                 </div>
               </div>
@@ -832,15 +855,15 @@ export default function PowerSection() {
         ))}
       </div>
 
-      {/* ─── Bottom strip: product claim ─── */}
+      {/* â”€â”€â”€ Bottom strip: product claim â”€â”€â”€ */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#aafc1c]/10 z-40" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-40 pb-3 hidden md:block">
         <p className="text-[9px] tracking-[0.45em] uppercase text-white/15 text-center">
-          High Caffeine · Taurine · Vitamins B · Natural Source · ₹60 · 250ml
+          High Caffeine Â· Taurine Â· Vitamins B Â· Natural Source Â· â‚¹60 Â· 250ml
         </p>
       </div>
 
-      {/* ─── Inline keyframe for scan animation ─── */}
+      {/* â”€â”€â”€ Inline keyframe for scan animation â”€â”€â”€ */}
       <style>{`
         @keyframes scan {
           0%   { transform: translateX(-120%); opacity: 0; }
@@ -852,3 +875,120 @@ export default function PowerSection() {
     </section>
   );
 }
+
+function BenefitUnlockCard({
+  benefit,
+  index,
+  active,
+}: {
+  benefit: Benefit;
+  index: number;
+  active: boolean;
+}) {
+  return (
+    <div
+      className={`ing-card ing-card-${index} group relative min-w-[180px] overflow-hidden px-4 py-3 transition-all duration-300 md:min-w-0 ${
+        active ? "text-white" : "text-white/45"
+      }`}
+      style={{
+        filter: active
+          ? "drop-shadow(0 0 18px rgba(170,252,28,0.24))"
+          : "none",
+      }}
+    >
+      {/* <svg
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 320 118"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id={`benefit-card-fill-${index}`} x1="0" x2="1">
+            <stop offset="0" stopColor="rgba(170,252,28,0.14)" />
+            <stop offset="0.48" stopColor="rgba(255,255,255,0.045)" />
+            <stop offset="1" stopColor="rgba(170,252,28,0.08)" />
+          </linearGradient>
+          <linearGradient id={`benefit-card-stroke-${index}`} x1="0" x2="1">
+            <stop offset="0" stopColor="rgba(170,252,28,0.9)" />
+            <stop offset="0.5" stopColor="rgba(170,252,28,0.16)" />
+            <stop offset="1" stopColor="rgba(255,255,255,0.38)" />
+          </linearGradient>
+          <filter id={`benefit-card-glow-${index}`} x="-30%" y="-60%" width="160%" height="220%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path
+          d="M14 1 H270 L319 50 V104 L305 117 H1 V16 Z"
+          fill={`url(#benefit-card-fill-${index})`}
+          opacity={active ? "1" : "0.52"}
+        />
+        <path
+          d="M14 1 H270 L319 50 V104 L305 117 H1 V16 Z"
+          fill="none"
+          stroke={`url(#benefit-card-stroke-${index})`}
+          strokeWidth={active ? "2" : "1"}
+          filter={active ? `url(#benefit-card-glow-${index})` : undefined}
+        />
+        <path
+          d="M18 101 H116 M284 18 H305 M302 77 H318"
+          stroke="#aafc1c"
+          strokeOpacity={active ? "0.9" : "0.25"}
+          strokeWidth="1.5"
+        />
+      </svg> */}
+
+      <div className="relative z-10 flex items-center gap-3">
+        <div
+          className={`grid h-11 w-11 flex-none place-items-center border transition-all duration-300 ${
+            active
+              ? "border-[#aafc1c]/80 bg-[#aafc1c]/15 text-[#aafc1c] shadow-[0_0_20px_rgba(170,252,28,0.24)]"
+              : "border-white/10 bg-white/[0.03] text-[#aafc1c]/45"
+          }`}
+          style={{
+            clipPath:
+              "polygon(25% 0,75% 0,100% 25%,100% 75%,75% 100%,25% 100%,0 75%,0 25%)",
+          }}
+        >
+          <div className="h-6 w-6">{benefit.icon}</div>
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 flex items-center gap-2">
+            <span
+              className={`text-[9px] font-black uppercase tracking-[0.22em] ${
+                active ? "text-[#aafc1c]" : "text-[#aafc1c]/35"
+              }`}
+            >
+              {benefit.spec}
+            </span>
+            <span className="h-px flex-1 bg-[#aafc1c]/15" />
+            <span className="text-[9px] font-black text-white/15">
+              {benefit.threshold}%
+            </span>
+          </div>
+          <h3 className="whitespace-pre-line text-sm font-black uppercase leading-[1.05] sm:text-base">
+            {benefit.title}
+          </h3>
+          <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-zinc-400">
+            {benefit.desc}
+          </p>
+        </div>
+
+        <span
+          className={`font-black leading-none transition-colors duration-300 ${
+            active ? "text-[#aafc1c]/45" : "text-white/[0.06]"
+          }`}
+        >
+          0{index + 1}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+
+

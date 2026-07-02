@@ -763,13 +763,12 @@ export default function BenefitsSection() {
         </div>
         <div className="bx-flash" ref={flashRef} />
 
-        <header className="bx-header">
-          <p className="bx-eyebrow">Charge sequence initiated</p>
-          <h2 className="bx-title">
-            <span className="bx-title-line">UNLEASH THE</span>
-            <span className="bx-title-line accent">FULL MATRIX</span>
+        
+          <h2 className="text-center font-bold">
+            <span className="bx-title-line inline!">Beni</span>
+            <span className="bx-title-line accent inline!">fits</span>
           </h2>
-        </header>
+        
 
         <div className="bx-stage" ref={stageRef}>
           <span className="bx-frame-corner tl" />

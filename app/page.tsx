@@ -1,4 +1,5 @@
 import BenefitsSection from "./components/BenefitsSection";
+import BenefitsSectionTwo from "./components/BenifitsSectionTwo";
 import CTASection from "./components/CTASection";
 import DistributorSection from "./components/DistributorSection";
 import EnergyShowcase from "./components/EnergyStatement";
@@ -14,7 +15,8 @@ export default function Home() {
       <Header />
       <HeroSection />
       <EnergyShowcase />
-      <BenefitsSection />
+      {/* <BenefitsSection /> */}
+      <BenefitsSectionTwo/>
       <XtreemSlider />
       <DistributorSection />
       <CTASection />
