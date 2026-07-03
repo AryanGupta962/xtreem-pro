@@ -11,8 +11,13 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { label: "Contact", href: "/contact", index: "01" },
-  { label: "Become Distributor", href: "/distributor", index: "02" },
+  { label: "Product", href: "#product", index: "01" },
+  { label: "Benefits", href: "#benefits", index: "02" },
+  { label: "Ingredients", href: "#ingredients", index: "03" },
+  { label: "Reviews", href: "#reviews", index: "04" },
+  { label: "FAQ", href: "#faq", index: "05" },
+  { label: "Contact", href: "/contact", index: "06" },
+  { label: "Become Distributor", href: "/distributor", index: "07" },
 ];
 
 interface StaggeredMenuProps {

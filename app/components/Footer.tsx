@@ -5,6 +5,8 @@ import { FaFacebookSquare } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
+      {/* Green Strip */}
+
       <div className="max-w-[1800px] mx-auto px-4 sm:px-8 md:px-16 py-10 sm:py-16 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-8">
         {/* Logo */}
         <Image
@@ -40,10 +42,18 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
       {/* Right */}
       <div className="text-center flex justify-center px-4 py-4 md:text-right text-[9px] sm:text-[10px] uppercase tracking-wider text-white/60">
         © 2026 I Boostt Food & Beverages Pvt. Ltd. All Rights Reserved. Extreem
         Pro is a registered brand of I Boostt Food & Beverages Pvt. Ltd.
+      </div>
+      <div className="bg-primary-green border border-black px-4 py-1 text-center">
+        <p className="text-black text-[11px] font-bold uppercase leading-tight">
+          Contains caffeine. Not recommended for children, pregnant or lactating
+          women and persons sensitive to caffeine. Consume not more than 500 ml
+          per day.
+        </p>
       </div>
     </footer>
   );

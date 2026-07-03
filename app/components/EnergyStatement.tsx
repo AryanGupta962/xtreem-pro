@@ -364,7 +364,7 @@ export default function EnergyShowcase() {
             </p>
 
             {/* Spec strip */}
-            <div
+            {/* <div
               className="mb-4 flex overflow-hidden rounded-[2px] border border-white/[0.07]"
               role="list"
               aria-label="Product specifications"
@@ -389,7 +389,7 @@ export default function EnergyShowcase() {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* Thin rule */}
             <div

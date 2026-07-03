@@ -24,7 +24,7 @@ export default function HeroSection() {
         preload="metadata"
         className="absolute inset-0 h-full w-full object-cover md:hidden"
       >
-        <source src="/videos/mobile-hero-1.mp4" type="video/mp4" />
+        <source src="/videos/mobile-hero.webm" type="video/mp4" />
       </video>
 
       {/* Hero Content */}

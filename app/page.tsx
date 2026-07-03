@@ -1,4 +1,3 @@
-import BenefitsSection from "./components/BenefitsSection";
 import BenefitsSectionTwo from "./components/BenifitsSectionTwo";
 import CTASection from "./components/CTASection";
 import DistributorSection from "./components/DistributorSection";
