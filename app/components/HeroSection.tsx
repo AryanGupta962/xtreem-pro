@@ -2,7 +2,7 @@
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section id="home" className="relative h-screen w-full overflow-hidden bg-black">
       {/* Desktop Video */}
       <video
         autoPlay

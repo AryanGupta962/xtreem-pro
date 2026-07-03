@@ -68,6 +68,7 @@ export default function DistributorSection() {
 
   return (
     <section
+      id="distributor"
       ref={sectionRef}
       className="relative overflow-hidden bg-black py-14 md:py-20"
     >

@@ -149,6 +149,7 @@ export default function EnergyShowcase() {
 
   return (
     <section
+      id="energy"
       ref={sectionRef}
       className="es2-section relative overflow-hidden bg-[#080808] text-[#F0F0F0] font-sans"
     >

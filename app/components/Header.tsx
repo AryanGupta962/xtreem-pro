@@ -5,15 +5,15 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { FiMenu } from "react-icons/fi";
 import { BsGrid3X3GapFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StaggeredMenu from "./StaggeredMenu";
 
 const navItems = [
-  { label: "PRODUCT", href: "#product" },
+  { label: "HOME", href: "#home" },
+  { label: "ENERGY", href: "#energy" },
   { label: "BENEFITS", href: "#benefits" },
-  { label: "INGREDIENTS", href: "#ingredients" },
-  { label: "REVIEWS", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
+  { label: "BRAND EXPERIENCE", href: "#experience" },
+  { label: "DISTRIBUTOR", href: "#distributor" },
 ];
 
 function AnimatedText({ text }: { text: string }) {
@@ -46,7 +46,36 @@ function AnimatedText({ text }: { text: string }) {
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const activeLink = "BENEFITS";
+  const [activeLink, setActiveLink] = useState(navItems[0].label);
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter((section): section is Element => Boolean(section));
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible?.target.id) return;
+        const match = navItems.find(
+          (item) => item.href === `#${visible.target.id}`,
+        );
+        if (match) setActiveLink(match.label);
+      },
+      {
+        rootMargin: "-35% 0px -50% 0px",
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -111,21 +140,7 @@ export default function Header() {
           {/* Desktop Actions */}
           <div className="relative z-10 hidden items-center gap-3 md:flex">
             <Link
-              href="/contact"
-              className="
-                group relative hidden h-9 items-center justify-center
-                overflow-hidden rounded-[8px] border border-white/15
-                bg-black/30 px-4 text-[12px] font-bold uppercase
-                tracking-[0.16em] text-white/65 transition-all duration-300
-                hover:border-white/30 hover:text-white
-                lg:flex
-              "
-            >
-              <AnimatedText text="CONTACT" />
-            </Link>
-
-            <Link
-              href="/become-distributor"
+              href="#distributor"
               className="
                 group relative flex h-9 items-center justify-center
                 overflow-hidden rounded-[8px] border border-[#C8FF00]/70

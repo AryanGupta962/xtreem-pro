@@ -253,6 +253,7 @@ export default function XtreemSlider() {
       <style>{GLOBAL_CSS}</style>
 
       <section
+        id="experience"
         className="xt-root"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
