@@ -14,7 +14,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "#home", index: "01" },
   { label: "Energy", href: "#energy", index: "02" },
   { label: "Benefits", href: "#benefits", index: "03" },
-  { label: "BRAND EXPERIENCE", href: "#experience", index: "04" },
+  { label: "Brand Experience", href: "#experience", index: "04" },
   { label: "Distributor", href: "#distributor", index: "05" },
 ];
 
