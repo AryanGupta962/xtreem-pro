@@ -34,9 +34,9 @@ export default function HeroSection() {
         </p>
 
         <h1
-          className="mb-6 bg-gradient-to-r from-primary-green via-white to-primary-green bg-clip-text font-black uppercase text-transparent"
+          className="mb-2 bg-gradient-to-r from-primary-green via-white to-primary-green bg-clip-text font-black uppercase text-transparent"
           style={{
-            fontSize: "clamp(2.8rem, 6vw, 4rem)",
+            fontSize: "clamp(2rem, 5vw, 4rem)",
             lineHeight: 0.95,
             letterSpacing: "-0.03em",
           }}
@@ -44,7 +44,7 @@ export default function HeroSection() {
           Premium Energy Drink
         </h1>
 
-        <p className="max-w-xl text-lg text-white/80">
+        <p className="max-sm:hidden max-w-xl text-lg text-white/80">
           Feel the power. Push every limit. Fuel every challenge.
         </p>
 
