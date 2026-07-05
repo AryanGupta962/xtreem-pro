@@ -138,7 +138,7 @@ export default function BenefitsSectionTwo() {
         scrollTrigger: { trigger: section, start: "top 74%" },
         opacity: 0,
         y: 46,
-        duration: 0.9,
+        duration: 1,
         ease: "power4.out",
       });
 
@@ -166,14 +166,14 @@ export default function BenefitsSectionTwo() {
         });
       }
 
-      gsap.from(".benefit-card-shell", {
-        scrollTrigger: { trigger: section, start: "top 58%" },
-        opacity: 0,
-        y: 36,
-        stagger: 0.08,
-        duration: 0.65,
-        ease: "power3.out",
-      });
+      // gsap.from(".benefit-card-shell", {
+      //   scrollTrigger: { trigger: section, start: "top 58%" },
+      //   opacity: 0,
+      //   y: 36,
+      //   stagger: 0.08,
+      //   duration: 0.65,
+      //   ease: "power3.out",
+      // });
 
       ScrollTrigger.create({
         trigger: section,
@@ -201,21 +201,21 @@ export default function BenefitsSectionTwo() {
           prevActiveRef.current = nextIndex;
           setActiveIndex(nextIndex);
 
-          const focusedCard = cardRefs.current[nextIndex];
-          if (focusedCard && !prefersReducedMotion) {
-            gsap.fromTo(
-              focusedCard,
-              { x: -38, scale: 0.96, filter: "blur(3px)" },
-              {
-                x: 0,
-                scale: 1,
-                filter: "blur(0px)",
-                duration: 0.5,
-                ease: "back.out(1.7)",
-                overwrite: true,
-              },
-            );
-          }
+          // const focusedCard = cardRefs.current[nextIndex];
+          // if (focusedCard && !prefersReducedMotion) {
+          //   gsap.fromTo(
+          //     focusedCard,
+          //     { x: -38, scale: 0.96, filter: "blur(3px)" },
+          //     {
+          //       x: 0,
+          //       scale: 1,
+          //       filter: "blur(0px)",
+          //       duration: 0.5,
+          //       ease: "back.out(1.7)",
+          //       overwrite: true,
+          //     },
+          //   );
+          // }
 
           if (detailRef.current && !prefersReducedMotion) {
             gsap.fromTo(
