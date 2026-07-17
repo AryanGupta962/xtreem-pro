@@ -52,8 +52,8 @@ const BENEFITS: Benefit[] = [
     threshold: 8,
     spec: "75MG",
     side: "left",
-    title: "Precision Energy,\nZero Crash",
-    desc: "Natural caffeine. Smooth boost, no jitters.",
+    title: "Natural Caffeine,\nBold Taste",
+    desc: "Natural caffeine in a crisp 250ml can.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -69,8 +69,8 @@ const BENEFITS: Benefit[] = [
     threshold: 24,
     spec: "B2·B3·B6·B12",
     side: "right",
-    title: "The Ultimate\nPower Matrix",
-    desc: "High-performance B-vitamin complex.",
+    title: "Vitamin B\nComplex",
+    desc: "B-vitamins listed as part of the formula.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <circle cx="24" cy="24" r="4" fill="currentColor" />
@@ -92,8 +92,8 @@ const BENEFITS: Benefit[] = [
     threshold: 41,
     spec: "TAURINE+",
     side: "left",
-    title: "Wired for\nPeak Endurance",
-    desc: "Taurine-infused for sharper reflexes and stamina.",
+    title: "Taurine\nFormula",
+    desc: "Taurine included in the beverage blend.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -133,8 +133,8 @@ const BENEFITS: Benefit[] = [
     threshold: 75,
     spec: "REAL CARBS",
     side: "left",
-    title: "Real Fuel,\nNo Fakes",
-    desc: "Hard-hitting carbohydrate energy, nothing synthetic.",
+    title: "Ingredient-Led\nFormula",
+    desc: "Straightforward formulation with declared ingredients.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -857,7 +857,7 @@ export default function BenefitsSection() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/can.png"
-                alt="Xtreem Pro XP energy drink can"
+                alt="Xtreem Pro XP caffeinated drink can"
                 className="bx-can-img"
                 ref={canImgRef}
                 draggable={false}

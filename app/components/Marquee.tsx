@@ -5,8 +5,8 @@ export default function EnergyMarquee() {
     "HIGH CAFFEINE",
     "TAURINE",
     "VITAMINS B",
-    "ENHANCED ENDURANCE",
-    "INTENSE ENERGY",
+    "BOLD FLAVOUR",
+    "CARBONATED DRINK",
   ];
 
   return (

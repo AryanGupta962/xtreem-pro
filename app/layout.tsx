@@ -15,9 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "XTREEM PRO | Premium Clean Energy Drink",
-  description: "Unleash your potential with XTREEM PRO. Powered by natural caffeine, taurine, and B-vitamins for clean, crash-free focus and sustained performance.",
-  keywords: "XTREEM PRO, energy drink, natural caffeine, clean energy, taurine, B-vitamins, performance, focus, recovery",
+  title: "XTREEM PRO | Premium Clean Caffeinated Drink",
+  description:
+    "XTREEM PRO is a premium caffeinated drink with natural caffeine, taurine, and B-vitamins.",
+  keywords:
+    "XTREEM PRO, caffeinated drink, natural caffeine, taurine, B-vitamins, 250ml beverage",
 };
 
 export default function RootLayout({

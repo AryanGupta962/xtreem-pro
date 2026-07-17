@@ -20,12 +20,12 @@ const BOTTOM_STATS: BottomStat[] = [
   {
     icon: GiMolecule,
     value: "TAURINE",
-    label: "ENDURANCE BOOST",
+    label: "TAURINE BLEND",
   },
   {
     icon: TbHexagonLetterB,
     value: "B-VITAMINS",
-    label: "ENERGY METABOLISM",
+    label: "VITAMIN B COMPLEX",
   },
   {
     icon: IoCubeSharp,

@@ -252,7 +252,7 @@ export default function HeroSection() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                <span className="text-shimmer">Premium Energy</span>
+                <span className="text-shimmer">Premium Caffeinated Drink</span>
               </h1>
 
               <div
@@ -319,7 +319,7 @@ export default function HeroSection() {
                 >
                   <Image
                     src="/images/can.png"
-                    alt="Premium Energy Drink Can"
+                    alt="Premium Caffeinated Drink Can"
                     fill
                     priority
                     sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
@@ -344,7 +344,7 @@ export default function HeroSection() {
                 className="font-black text-white leading-none tracking-tight"
                 style={{ fontSize: "clamp(1.8rem, 6vw, 5rem)" }}
               >
-                ENERGY DRINK
+                CAFFEINATED DRINK
                 <br />
                 <span className="bg-gradient-to-r from-primary-green via-white to-primary-green bg-clip-text text-transparent">
                   WITH NATURAL CAFFEINE
@@ -352,7 +352,7 @@ export default function HeroSection() {
               </h2>
 
               <p className="mt-3 sm:mt-6 text-white/80 max-w-sm sm:max-w-md mx-auto text-sm sm:text-base md:text-lg leading-snug">
-                75mg Pure Power • Zero Crash • 18 Months Shelf Life
+                75mg Caffeine • 250ml Can • 18 Months Shelf Life
               </p>
             </div>
 

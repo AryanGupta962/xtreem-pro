@@ -106,7 +106,7 @@ export default function DistributorSection() {
             </div>
 
             <p className="description mt-4 sm:mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg md:text-xl">
-              Join one of the fastest-growing energy drink brands and build a
+              Join one of the fastest-growing caffeinated beverage brands and build a
               profitable distribution network backed by premium branding,
               marketing support, and explosive market demand.
             </p>

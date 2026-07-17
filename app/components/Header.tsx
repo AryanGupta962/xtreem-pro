@@ -10,7 +10,7 @@ import StaggeredMenu from "./StaggeredMenu";
 
 const navItems = [
   { label: "HOME", href: "#home" },
-  { label: "ENERGY", href: "#energy" },
+  { label: "FORMULA", href: "#energy" },
   { label: "BENEFITS", href: "#benefits" },
   { label: "BRAND EXPERIENCE", href: "#experience" },
   { label: "DISTRIBUTOR", href: "#distributor" },

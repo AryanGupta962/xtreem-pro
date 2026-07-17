@@ -16,9 +16,9 @@ const SPECS = [
 ];
 
 const STATS = [
-  { num: "3×", label: "Energy\nBoost" },
-  { num: "5H", label: "Sustained\nFocus" },
-  { num: "#1", label: "India's\nPro Drink" },
+  { num: "250", label: "ML\nCAN" },
+  { num: "75", label: "MG\nCAFFEINE" },
+  { num: "#1", label: "XTREEM\nPRO" },
 ];
 
 export default function EnergyShowcase() {
@@ -218,7 +218,7 @@ export default function EnergyShowcase() {
               }}
             />
             <span className="text-[0.55rem] font-medium tracking-[0.3em] text-white/25">
-              ENERGY
+              FORMULA
             </span>
           </div>
         </aside>
@@ -327,7 +327,7 @@ export default function EnergyShowcase() {
                 className="es2-eyebrow-text text-[0.58rem] font-semibold tracking-[0.24em]"
                 style={{ color: "#B6F000" }}
               >
-                ENERGY · ENDURANCE · FOCUS
+                CAFFEINE · TAURINE · B-VITAMINS
               </span>
             </div>
 
@@ -359,9 +359,9 @@ export default function EnergyShowcase() {
 
             {/* Body */}
             <p className="es2-body mb-4 max-w-[420px] text-[0.82rem] font-light leading-[1.7] text-white/50">
-              Powered with Taurine, Caffeine and B&#8209;Vitamins — Xtreem Pro
-              delivers intense energy, enhanced endurance and laser focus for
-              those who refuse to settle for average.
+              Crafted with taurine, caffeine and B&#8209;vitamins, Xtreem Pro
+              is a bold caffeinated drink made for a strong, distinctive
+              drinking experience.
             </p>
 
             {/* Spec strip */}

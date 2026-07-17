@@ -41,11 +41,11 @@ export default function HeroSection() {
             letterSpacing: "-0.03em",
           }}
         >
-          Premium Energy Drink
+          Premium Caffeinated Drink
         </h1>
 
         <p className="max-sm:hidden max-w-xl text-lg text-white/80">
-          Feel the power. Push every limit. Fuel every challenge.
+          Bold taste. Crisp carbonation. Ready-to-drink convenience.
         </p>
 
         {/* <div className="mt-12 flex flex-col items-center">

@@ -86,7 +86,7 @@ export default function DistributorForm() {
 
           <p className="mt-3 text-sm text-zinc-400">
             Become an official distribution partner and grow with one of the
-            fastest-growing energy drink brands.
+            fastest-growing caffeinated beverage brands.
           </p>
 
           {submitted ? (

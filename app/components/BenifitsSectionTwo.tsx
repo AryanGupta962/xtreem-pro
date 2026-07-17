@@ -42,37 +42,36 @@ const BENEFITS: Benefit[] = [
     threshold: 8,
     spec: "250MG",
     icon: AiFillThunderbolt,
-    title: "PRECISION ENERGY",
-    description: "Clean, smooth energy that kicks in fast and lasts longer.",
-    detailTitle: "Precision",
-    detailAccent: "Energy",
+    title: "CAFFEINATED FORMULA",
+    description: "Natural caffeine in a bold, ready-to-drink format.",
+    detailTitle: "Caffeinated",
+    detailAccent: "Formula",
     detailBody:
-      "Fast-starting caffeine delivery for clean momentum without the heavy crash.",
+      "A ready-to-drink formula made with natural caffeine.",
   },
   {
     id: "02",
     threshold: 24,
     spec: "B-COMPLEX",
     icon: Atom,
-    title: "ULTIMATE POWER MATRIX",
-    description:
-      "High-performance B-vitamins and key nutrients for peak output.",
-    detailTitle: "Power",
-    detailAccent: "Matrix",
+    title: "VITAMIN B COMPLEX",
+    description: "B-vitamins and key ingredients listed in the formula.",
+    detailTitle: "Vitamin B",
+    detailAccent: "Complex",
     detailBody:
-      "A focused B-vitamin stack supports energy metabolism when output matters.",
+      "B-vitamins are included as part of the beverage composition.",
   },
   {
     id: "03",
     threshold: 41,
     spec: "TAURINE",
     icon: BicepsFlexed,
-    title: "WIRED FOR ENDURANCE",
-    description: "Taurine-infused to support stamina, focus and recovery.",
-    detailTitle: "Endurance",
-    detailAccent: "Wired",
+    title: "TAURINE BLEND",
+    description: "Taurine included in the product blend.",
+    detailTitle: "Taurine",
+    detailAccent: "Blend",
     detailBody:
-      "Taurine-backed support for sustained focus, stamina and sharper recovery.",
+      "Taurine is one of the declared ingredients in the formulation.",
   },
   {
     id: "04",
@@ -81,23 +80,23 @@ const BENEFITS: Benefit[] = [
     icon: ShieldCheck,
     title: "100% CLEAN FORMULATION",
     description:
-      "Lab-certified. Zero synthetic colors. No crash. Just performance.",
+      "Lab-certified. Zero synthetic colors.",
     detailTitle: "Clean",
     detailAccent: "Formula",
     detailBody:
-      "No synthetic colors, no unnecessary drag, just performance-forward fuel.",
+      "No synthetic colors, with a straightforward formulation profile.",
   },
   {
     id: "05",
     threshold: 75,
-    spec: "REAL FUEL",
+    spec: "INGREDIENTS",
     icon: FaLeaf,
-    title: "REAL FUEL. NO FAKES",
-    description: "Made with real ingredients your body recognizes and absorbs.",
-    detailTitle: "Real",
-    detailAccent: "Fuel",
+    title: "INGREDIENT-LED FORMULA",
+    description: "Made with declared ingredients in a ready-to-drink blend.",
+    detailTitle: "Ingredient",
+    detailAccent: "Formula",
     detailBody:
-      "Recognizable ingredients designed to hit clean and support active output.",
+      "A beverage formula centered on clearly declared ingredients.",
   },
 ];
 
@@ -268,8 +267,8 @@ export default function BenefitsSectionTwo() {
           </h2>
           <p className="mt-3 flex justify-center items-center gap-1.5 text-[10px] font-semibold tracking-[0.2em] text-neutral-300 sm:text-sm">
             <span className="max-sm:hidden h-px sm:w-8 bg-neutral-500" />
-            FUEL YOUR <span className="text-lime-400">EDGE</span>. UNLEASH YOUR{" "}
-            <span className="text-lime-400">POTENTIAL</span>.
+            BOLD <span className="text-lime-400">FORMULA</span>. DISTINCTIVE{" "}
+            <span className="text-lime-400">TASTE</span>.
             <span className="max-sm:hidden h-px w-8 bg-neutral-500" />
           </p>
         </header>
@@ -295,7 +294,7 @@ export default function BenefitsSectionTwo() {
             >
               <Image
                 src="/images/can.webp"
-                alt="Xtreem Pro Energy Drink Can"
+                alt="Xtreem Pro Caffeinated Drink Can"
                 width={520}
                 height={760}
                 priority
