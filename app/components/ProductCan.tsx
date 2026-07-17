@@ -60,14 +60,14 @@ export default function ProductCan() {
         }}
       >
         <Image
-          src="/images/can.png"
+          src="/images/can-new.webp"
           alt="XTREEM Pro XP Caffeinated Drink"
           width={600}
           height={600}
           priority
           className="can-img relative z-10 object-contain"
           style={{
-            height: "clamp(180px, 32vw, 380px)",
+            height: "clamp(480px, 32vw, 620px)",
             width: "auto",
             filter: "drop-shadow(0 0 55px rgba(188,224,64,0.38))",
           }}

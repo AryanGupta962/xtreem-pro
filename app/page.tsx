@@ -1,22 +1,19 @@
-import BenefitsSectionTwo from "./components/BenifitsSectionTwo";
+import AboutSection from "./components/AboutSection";
 import CTASection from "./components/CTASection";
 import DistributorSection from "./components/DistributorSection";
-import EnergyShowcase from "./components/EnergyStatement";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import EnergyMarquee from "./components/Marquee";
-import XtreemSlider from "./components/XtreemSlider";
+import NutritionSection from "./components/NutritionSection";
 
 export default function Home() {
   return (
     <div className="relative">
       <Header />
       <HeroSection />
-      <EnergyShowcase />
-      {/* <BenefitsSection /> */}
-      <BenefitsSectionTwo/>
-      <XtreemSlider />
+      <NutritionSection />
+      <AboutSection />
       <DistributorSection />
       <CTASection />
       <EnergyMarquee />

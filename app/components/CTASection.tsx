@@ -86,11 +86,11 @@ export default function CTASection() {
             style={{ fontSize: "clamp(1.5rem, 9vw, 5rem)" }}
           >
             <span className="pr-2 block whitespace-nowrap bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
-              READY TO UNLEASH
+              BOLD TASTE.
             </span>
 
             <span className="block bg-gradient-to-r from-[#B8FF00] to-[#F5FFE0] bg-clip-text text-transparent">
-              YOUR POTENTIAL?
+              CLEAR DETAILS.
             </span>
           </h2>
         </motion.div>
