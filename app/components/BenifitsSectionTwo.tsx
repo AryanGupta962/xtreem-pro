@@ -166,15 +166,6 @@ export default function BenefitsSectionTwo() {
         });
       }
 
-      // gsap.from(".benefit-card-shell", {
-      //   scrollTrigger: { trigger: section, start: "top 58%" },
-      //   opacity: 0,
-      //   y: 36,
-      //   stagger: 0.08,
-      //   duration: 0.65,
-      //   ease: "power3.out",
-      // });
-
       ScrollTrigger.create({
         trigger: section,
         start: "top center",
