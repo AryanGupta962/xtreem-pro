@@ -8,17 +8,17 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const SPECS = [
-  { key: "CAFFEINE", val: "80MG" },
-  { key: "TAURINE", val: "1000MG" },
-  { key: "B-VITAMINS", val: "COMPLEX" },
+  { key: "CAFFEINE", val: "SEE PACK" },
+  { key: "SERVING", val: "SEE PACK" },
+  { key: "FLAVOUR", val: "SEE PACK" },
   { key: "VOLUME", val: "250ML" },
-  { key: "SUGAR", val: "0G" },
+  { key: "CATEGORY", val: "CAFFEINATED" },
 ];
 
 const STATS = [
-  { num: "3×", label: "Energy\nBoost" },
-  { num: "5H", label: "Sustained\nFocus" },
-  { num: "#1", label: "India's\nPro Drink" },
+  { num: "01", label: "Good\nMoment" },
+  { num: "24/7", label: "Everyday\nConnection" },
+  { num: "∞", label: "Your\nWay" },
 ];
 
 export default function EnergyShowcase() {
@@ -218,7 +218,7 @@ export default function EnergyShowcase() {
               }}
             />
             <span className="text-[0.55rem] font-medium tracking-[0.3em] text-white/25">
-              ENERGY
+              CAFFEINATED
             </span>
           </div>
         </aside>
@@ -327,19 +327,19 @@ export default function EnergyShowcase() {
                 className="es2-eyebrow-text text-[0.58rem] font-semibold tracking-[0.24em]"
                 style={{ color: "#B6F000" }}
               >
-                ENERGY · ENDURANCE · FOCUS
+                CAFFEINATED BEVERAGE · YOUR EVERYDAY RITUAL
               </span>
             </div>
 
             {/* Headline */}
             <h2
               className="flex flex-col mb-3 leading-[0.88]"
-              aria-label="Unleash Your Potential"
+              aria-label="Unleash Your Everyday"
             >
               {[
                 { text: "UNLEASH", accent: false },
                 { text: "YOUR", accent: false },
-                { text: "POTENTIAL", accent: true },
+                { text: "MOMENT", accent: true },
               ].map(({ text, accent }) => (
                 <span key={text} className="overflow-hidden block">
                   <span
@@ -359,9 +359,10 @@ export default function EnergyShowcase() {
 
             {/* Body */}
             <p className="es2-body mb-4 max-w-[420px] text-[0.82rem] font-light leading-[1.7] text-white/50">
-              Powered with Taurine, Caffeine and B&#8209;Vitamins — Xtreem Pro
-              delivers intense energy, enhanced endurance and laser focus for
-              those who refuse to settle for average.
+              Xtreem Pro is a caffeinated beverage made for everyday life.
+              Open one when you are meeting friends, making
+              something, or taking a moment for yourself. Please read the pack
+              for ingredients and caffeine quantity before consuming.
             </p>
 
             {/* Spec strip */}
@@ -437,7 +438,7 @@ export default function EnergyShowcase() {
                 className="inline-flex items-center gap-2.5 rounded-[2px] border-0 px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black transition-all duration-200 hover:brightness-110 hover:-translate-y-px active:translate-y-0"
                 style={{ background: "#B6F000" }}
               >
-                <span>Explore the Can</span>
+                <span>Meet XTREEM PRO</span>
                 <svg
                   width="14"
                   height="14"
@@ -456,7 +457,7 @@ export default function EnergyShowcase() {
 
               {/* Secondary — Buy Now (outlined) */}
               <button className="inline-flex items-center gap-2 rounded-[2px] border border-white/25 bg-transparent px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white/80 transition-all duration-200 hover:border-[#B6F000] hover:text-[#B6F000] hover:bg-[rgba(182,240,0,0.04)]">
-                Contact
+                Talk to us
               </button>
             </div>
           </div>

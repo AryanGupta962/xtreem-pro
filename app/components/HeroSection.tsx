@@ -30,7 +30,7 @@ export default function HeroSection() {
       {/* Hero Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-end px-6 pb-5 text-center">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.35em] text-white/70">
-          Charged. Clean. Unstoppable.
+          Made for your moment. Made to be shared.
         </p>
 
         <h1
@@ -41,11 +41,11 @@ export default function HeroSection() {
             letterSpacing: "-0.03em",
           }}
         >
-          Premium Energy Drink
+          Caffeinated Beverage
         </h1>
 
         <p className="max-sm:hidden max-w-xl text-lg text-white/80">
-          Feel the power. Push every limit. Fuel every challenge.
+          A refreshing lift for commutes, conversations, creative sprints and the moments that matter to you.
         </p>
 
         {/* <div className="mt-12 flex flex-col items-center">

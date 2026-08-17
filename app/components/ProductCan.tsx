@@ -61,7 +61,7 @@ export default function ProductCan() {
       >
         <Image
           src="/images/can.png"
-          alt="XTREEM Pro XP Energy Drink"
+          alt="XTREEM Pro XP Caffeinated Beverage"
           width={600}
           height={600}
           priority

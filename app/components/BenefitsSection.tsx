@@ -52,8 +52,8 @@ const BENEFITS: Benefit[] = [
     threshold: 8,
     spec: "75MG",
     side: "left",
-    title: "Precision Energy,\nZero Crash",
-    desc: "Natural caffeine. Smooth boost, no jitters.",
+    title: "A Moment to\nReset",
+    desc: "A refreshing ritual for the moments you choose to make your own.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -69,8 +69,8 @@ const BENEFITS: Benefit[] = [
     threshold: 24,
     spec: "B2·B3·B6·B12",
     side: "right",
-    title: "The Ultimate\nPower Matrix",
-    desc: "High-performance B-vitamin complex.",
+    title: "A Thoughtful\nFormula",
+    desc: "B-vitamin information shown for transparency; check the approved label for final values.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <circle cx="24" cy="24" r="4" fill="currentColor" />
@@ -90,10 +90,10 @@ const BENEFITS: Benefit[] = [
   },
   {
     threshold: 41,
-    spec: "TAURINE+",
+    spec: "YOUR RHYTHM",
     side: "left",
-    title: "Wired for\nPeak Endurance",
-    desc: "Taurine-infused for sharper reflexes and stamina.",
+    title: "Find Your\nRhythm",
+    desc: "Fits naturally into your everyday pace, from morning to late night.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -107,10 +107,10 @@ const BENEFITS: Benefit[] = [
   },
   {
     threshold: 58,
-    spec: "0% SYNTH",
+    spec: "LABEL FIRST",
     side: "right",
-    title: "100% Clean\nFormulation",
-    desc: "Lab-certified. Zero synthetic colors.",
+    title: "Know What You\nChoose",
+    desc: "Check the ingredient list, caffeine quantity and serving guidance on the pack.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -133,8 +133,8 @@ const BENEFITS: Benefit[] = [
     threshold: 75,
     spec: "REAL CARBS",
     side: "left",
-    title: "Real Fuel,\nNo Fakes",
-    desc: "Hard-hitting carbohydrate energy, nothing synthetic.",
+    title: "Make It\nYours",
+    desc: "A simple choice for the people, places and plans that matter to you.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -151,8 +151,8 @@ const BENEFITS: Benefit[] = [
     threshold: 92,
     spec: "0PPM METALS",
     side: "right",
-    title: "Certified\nPristine",
-    desc: "Rigorously lab-tested. Zero heavy metals detected.",
+    title: "Read The\nLabel",
+    desc: "Use the approved ingredient, nutrition and caffeine declarations before making a choice.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none">
         <path
@@ -857,7 +857,7 @@ export default function BenefitsSection() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/can.png"
-                alt="Xtreem Pro XP energy drink can"
+                alt="Xtreem Pro XP caffeinated beverage can"
                 className="bx-can-img"
                 ref={canImgRef}
                 draggable={false}

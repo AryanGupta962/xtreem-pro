@@ -240,7 +240,7 @@ export default function HeroSection() {
                   animationFillMode: "forwards",
                 }}
               >
-                Charged. Clean. Unstoppable.
+                Made for your moment. Made to be shared.
               </div>
 
               <h1
@@ -252,7 +252,7 @@ export default function HeroSection() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                <span className="text-shimmer">Premium Energy</span>
+                <span className="text-shimmer">Caffeinated Beverage</span>
               </h1>
 
               <div
@@ -319,7 +319,7 @@ export default function HeroSection() {
                 >
                   <Image
                     src="/images/can.png"
-                    alt="Premium Energy Drink Can"
+                    alt="Premium Caffeinated Beverage Can"
                     fill
                     priority
                     sizes="(max-width: 640px) 160px, (max-width: 768px) 190px, 220px"
@@ -344,21 +344,21 @@ export default function HeroSection() {
                 className="font-black text-white leading-none tracking-tight"
                 style={{ fontSize: "clamp(1.8rem, 6vw, 5rem)" }}
               >
-                ENERGY DRINK
+                CAFFEINATED BEVERAGE
                 <br />
                 <span className="bg-gradient-to-r from-primary-green via-white to-primary-green bg-clip-text text-transparent">
-                  WITH NATURAL CAFFEINE
+                  WITH CAFFEINE
                 </span>
               </h2>
 
               <p className="mt-3 sm:mt-6 text-white/80 max-w-sm sm:max-w-md mx-auto text-sm sm:text-base md:text-lg leading-snug">
-                75mg Pure Power • Zero Crash • 18 Months Shelf Life
+                75mg per serving • Read the label • 250ml
               </p>
             </div>
 
             {/* Bottom Tagline — hidden on very short screens to avoid overlap */}
             <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 hidden xs:block text-[10px] sm:text-xs uppercase tracking-[3px] text-white/50 font-medium z-30">
-              ELECTRIC • CLEAN • UNSTOPPABLE
+                READ THE LABEL • SHARE THE MOMENT
             </div>
           </div>
 

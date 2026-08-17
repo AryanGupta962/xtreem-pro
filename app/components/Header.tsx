@@ -10,8 +10,10 @@ import StaggeredMenu from "./StaggeredMenu";
 
 const navItems = [
   { label: "HOME", href: "#home" },
-  { label: "ENERGY", href: "#energy" },
+  { label: "THE MOMENT", href: "#energy" },
   { label: "BENEFITS", href: "#benefits" },
+  { label: "NUTRITION", href: "#nutrition" },
+  { label: "FSSAI", href: "#fssai-guidelines" },
   { label: "BRAND EXPERIENCE", href: "#experience" },
   { label: "DISTRIBUTOR", href: "#distributor" },
 ];

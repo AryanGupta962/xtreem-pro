@@ -2,11 +2,11 @@
 
 export default function EnergyMarquee() {
   const items = [
-    "HIGH CAFFEINE",
-    "TAURINE",
-    "VITAMINS B",
-    "ENHANCED ENDURANCE",
-    "INTENSE ENERGY",
+    "CAFFEINATED BEVERAGE",
+    "READ THE LABEL",
+    "SHARE THE MOMENT",
+    "YOUR EVERYDAY RITUAL",
+    "MADE FOR CONNECTION",
   ];
 
   return (

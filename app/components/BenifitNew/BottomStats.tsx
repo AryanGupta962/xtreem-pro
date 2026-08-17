@@ -15,27 +15,27 @@ const BOTTOM_STATS: BottomStat[] = [
   {
     icon: PiLightningFill,
     value: "CAFFEINE",
-    label: "NATURAL CAFFEINE",
+    label: "DECLARED ON PACK",
   },
   {
     icon: GiMolecule,
-    value: "TAURINE",
-    label: "ENDURANCE BOOST",
+    value: "LABEL",
+    label: "READ BEFORE USE",
   },
   {
     icon: TbHexagonLetterB,
-    value: "B-VITAMINS",
-    label: "ENERGY METABOLISM",
+    value: "250ML",
+    label: "SERVING SIZE",
   },
   {
     icon: IoCubeSharp,
-    value: "0g",
-    label: "SUGAR",
+    value: "FSSAI",
+    label: "GUIDED LABEL",
   },
   {
     icon: MdGpsFixed,
     value: "MADE FOR",
-    label: "PEAK PERFORMERS",
+    label: "EVERYDAY MOMENTS",
   },
 ];
 

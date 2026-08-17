@@ -85,8 +85,8 @@ export default function DistributorForm() {
           </h3>
 
           <p className="mt-3 text-sm text-zinc-400">
-            Become an official distribution partner and grow with one of the
-            fastest-growing energy drink brands.
+            Tell us about your market and join a growing community of XTREEM
+            PRO partners for our caffeinated beverage range.
           </p>
 
           {submitted ? (

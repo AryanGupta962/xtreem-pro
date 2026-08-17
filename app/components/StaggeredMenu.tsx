@@ -12,10 +12,12 @@ interface NavLink {
 
 const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "#home", index: "01" },
-  { label: "Energy", href: "#energy", index: "02" },
+  { label: "The Moment", href: "#energy", index: "02" },
   { label: "Benefits", href: "#benefits", index: "03" },
-  { label: "Brand Experience", href: "#experience", index: "04" },
-  { label: "Distributor", href: "#distributor", index: "05" },
+  { label: "Nutrition", href: "#nutrition", index: "04" },
+  { label: "FSSAI Guidelines", href: "#fssai-guidelines", index: "05" },
+  { label: "Brand Experience", href: "#experience", index: "06" },
+  { label: "Distributor", href: "#distributor", index: "07" },
 ];
 
 interface StaggeredMenuProps {
@@ -223,7 +225,7 @@ export default function StaggeredMenu({ isOpen, onClose }: StaggeredMenuProps) {
           style={{ fontFamily: "'Inter', sans-serif" }}
           className="text-[11px] tracking-[2px] text-[#333] uppercase"
         >
-          Unleash Your Potential
+          Unleash Your Moment
         </span>
       </div>
     </div>

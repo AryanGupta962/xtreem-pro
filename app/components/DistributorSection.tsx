@@ -106,30 +106,31 @@ export default function DistributorSection() {
             </div>
 
             <p className="description mt-4 sm:mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg md:text-xl">
-              Join one of the fastest-growing energy drink brands and build a
-              profitable distribution network backed by premium branding,
-              marketing support, and explosive market demand.
+              Bring a more thoughtful caffeinated beverage experience to your
+              customers. We are building a partner community around clear
+              communication, responsible serving information and memorable
+              everyday moments.
             </p>
 
             <div className="mt-6 space-y-5">
               <div className="benefit-card">
                 <BenefitCard
-                  title="Strong Retail Demand"
-                  description="High turn-over rates driven by premium branding and competitive pricing."
+                  title="A brand people remember"
+                  description="Distinctive creative, clear product communication and a warm point of view."
                 />
               </div>
 
               <div className="benefit-card">
                 <BenefitCard
-                  title="Marketing Support"
-                  description="Full access to branding assets, POS materials and digital campaigns."
+                  title="Partner support"
+                  description="Brand assets and practical support to help you introduce XTREEM PRO locally."
                 />
               </div>
 
               <div className="benefit-card">
                 <BenefitCard
-                  title="Fast Growing Category"
-                  description="Secure your territory in the booming functional beverage market."
+                  title="Responsible growth"
+                  description="Grow with a product story that keeps label awareness and consumer choice at the centre."
                 />
               </div>
             </div>

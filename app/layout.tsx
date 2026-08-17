@@ -15,9 +15,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "XTREEM PRO | Premium Clean Energy Drink",
-  description: "Unleash your potential with XTREEM PRO. Powered by natural caffeine, taurine, and B-vitamins for clean, crash-free focus and sustained performance.",
-  keywords: "XTREEM PRO, energy drink, natural caffeine, clean energy, taurine, B-vitamins, performance, focus, recovery",
+  title: {
+    default: "XTREEM PRO | Caffeinated Beverage",
+    template: "%s | XTREEM PRO",
+  },
+  description:
+    "Explore XTREEM PRO, a caffeinated beverage with label-focused nutrition information, caffeine guidance and FSSAI awareness for responsible choice.",
+  keywords: [
+    "XTREEM PRO",
+    "caffeinated beverage India",
+    "caffeine per serving",
+    "nutrition information",
+    "FSSAI caffeinated beverage guidelines",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "XTREEM PRO | Caffeinated Beverage",
+    description:
+      "Label-focused nutrition, caffeine guidance and FSSAI awareness for XTREEM PRO.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

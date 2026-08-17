@@ -40,71 +40,71 @@ const BENEFITS: Benefit[] = [
   {
     id: "01",
     threshold: 8,
-    spec: "250MG",
+    spec: "CAFFEINE",
     icon: AiFillThunderbolt,
-    title: "PRECISION ENERGY",
-    description: "Clean, smooth energy that kicks in fast and lasts longer.",
-    detailTitle: "Precision",
-    detailAccent: "Energy",
+    title: "A MOMENT TO RESET",
+    description: "A refreshing ritual for the moments you choose to make your own.",
+    detailTitle: "Your",
+    detailAccent: "Moment",
     detailBody:
-      "Fast-starting caffeine delivery for clean momentum without the heavy crash.",
+      "Make space for a pause, a conversation, or whatever helps you move through your day.",
   },
   {
     id: "02",
     threshold: 24,
-    spec: "B-COMPLEX",
+    spec: "FLAVOUR",
     icon: Atom,
-    title: "ULTIMATE POWER MATRIX",
+    title: "MADE FOR CONNECTION",
     description:
-      "High-performance B-vitamins and key nutrients for peak output.",
-    detailTitle: "Power",
-    detailAccent: "Matrix",
+      "A familiar taste to bring people together, wherever the day takes you.",
+    detailTitle: "Made",
+    detailAccent: "Together",
     detailBody:
-      "A focused B-vitamin stack supports energy metabolism when output matters.",
+      "From first introductions to old friends, the best moments are better shared.",
   },
   {
     id: "03",
     threshold: 41,
-    spec: "TAURINE",
+    spec: "RHYTHM",
     icon: BicepsFlexed,
-    title: "WIRED FOR ENDURANCE",
-    description: "Taurine-infused to support stamina, focus and recovery.",
-    detailTitle: "Endurance",
-    detailAccent: "Wired",
+    title: "FIND YOUR RHYTHM",
+    description: "Fits naturally into your everyday pace, from morning to late night.",
+    detailTitle: "Find",
+    detailAccent: "Your Rhythm",
     detailBody:
-      "Taurine-backed support for sustained focus, stamina and sharper recovery.",
+      "There is no single right way to enjoy your day. Find the rhythm that feels like yours.",
   },
   {
     id: "04",
     threshold: 58,
-    spec: "CLEAN",
+    spec: "LABEL FIRST",
     icon: ShieldCheck,
-    title: "100% CLEAN FORMULATION",
+    title: "KNOW WHAT YOU CHOOSE",
     description:
-      "Lab-certified. Zero synthetic colors. No crash. Just performance.",
-    detailTitle: "Clean",
-    detailAccent: "Formula",
+      "Clear, responsible communication starts with reading the label.",
+    detailTitle: "Read",
+    detailAccent: "The Label",
     detailBody:
-      "No synthetic colors, no unnecessary drag, just performance-forward fuel.",
+      "Check the ingredient list, caffeine quantity and serving guidance on the pack before consuming.",
   },
   {
     id: "05",
     threshold: 75,
-    spec: "REAL FUEL",
+    spec: "YOUR CHOICE",
     icon: FaLeaf,
-    title: "REAL FUEL. NO FAKES",
-    description: "Made with real ingredients your body recognizes and absorbs.",
-    detailTitle: "Real",
-    detailAccent: "Fuel",
+    title: "MAKE IT YOURS",
+    description: "A simple choice for the people, places and plans that energise you.",
+    detailTitle: "Make",
+    detailAccent: "It Yours",
     detailBody:
-      "Recognizable ingredients designed to hit clean and support active output.",
+      "Take a moment, share the feeling, and keep the experience personal to you.",
   },
 ];
 
 const STATS = [
-  { icon: HiBeaker, value: "92%", label: "RIGHT\nCHANNEL" },
-  { icon: HiBeaker, value: "", label: "LAB\nTESTED" },
-  { icon: ShieldCheck, value: "", label: "ZERO HEAVY\nMETALS" },
+  { icon: HiBeaker, value: "250ML", label: "SERVING\nSIZE" },
+  { icon: HiBeaker, value: "75MG", label: "CAFFEINE\nPER SERVING" },
+  { icon: ShieldCheck, value: "READ", label: "THE\nLABEL" },
 ];
 
 export default function BenefitsSectionTwo() {
@@ -259,8 +259,8 @@ export default function BenefitsSectionTwo() {
           </h2>
           <p className="mt-3 flex justify-center items-center gap-1.5 text-[10px] font-semibold tracking-[0.2em] text-neutral-300 sm:text-sm">
             <span className="max-sm:hidden h-px sm:w-8 bg-neutral-500" />
-            FUEL YOUR <span className="text-lime-400">EDGE</span>. UNLEASH YOUR{" "}
-            <span className="text-lime-400">POTENTIAL</span>.
+            UNLEASH YOUR <span className="text-lime-400">MOMENT</span>. SHARE THE{" "}
+            <span className="text-lime-400">FEELING</span>.
             <span className="max-sm:hidden h-px w-8 bg-neutral-500" />
           </p>
         </header>
@@ -286,7 +286,7 @@ export default function BenefitsSectionTwo() {
             >
               <Image
                 src="/images/can.webp"
-                alt="Xtreem Pro Energy Drink Can"
+                alt="Xtreem Pro Caffeinated Beverage Can"
                 width={520}
                 height={760}
                 priority
@@ -330,7 +330,7 @@ export default function BenefitsSectionTwo() {
 
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-300">
                   <ShieldCheck size={20} className="text-[#C8FF00]" />
-                  Channel unlock / {activeBenefit.threshold}% charge
+                  A closer look at the choice
                 </div>
 
                 <p className="text-sm leading-relaxed text-neutral-300">
@@ -359,9 +359,9 @@ export default function BenefitsSectionTwo() {
 
                 <div>
                   <div className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                    <span>Charge level</span>
+                  <span>Explore the range</span>
                     <span className="text-[#C8FF00] text-sm">
-                      {activeBenefit.threshold}%
+                      {activeBenefit.id}/05
                     </span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
@@ -373,7 +373,7 @@ export default function BenefitsSectionTwo() {
                 </div>
 
                 <button className="mt-1 flex items-center justify-center gap-3 rounded-lg bg-[#C8FF00] py-3 text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-lime-300">
-                  Explore the edge
+                  Find your moment
                   <ArrowRight size={14} />
                 </button>
               </div>
