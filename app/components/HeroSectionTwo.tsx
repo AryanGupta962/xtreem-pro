@@ -318,7 +318,7 @@ export default function HeroSection() {
                   style={{ height: "clamp(260px, 48vh, 500px)" }}
                 >
                   <Image
-                    src="/images/can.png"
+                    src="/images/xtreem-pro-can-v2.png"
                     alt="Premium Caffeinated Beverage Can"
                     fill
                     priority

@@ -1304,8 +1304,8 @@ export default function EnergyDrinkSplashCursor({
     function clickSplat(pointer: Pointer) {
       const color = generateColor();
       // Boosted multiplier (vs. the 10x base) -> click bursts read as a
-      // bright neon "energy hit" rather than a subtle blob, fitting an
-      // energy-drink CTA moment (e.g. clicking "Buy now").
+      // bright neon interaction rather than a subtle blob, fitting a
+      // caffeinated-beverage CTA moment (e.g. clicking "Buy now").
       color.r *= 14;
       color.g *= 14;
       color.b *= 14;

@@ -285,7 +285,7 @@ export default function BenefitsSectionTwo() {
               className="relative grid h-[410px] w-full max-w-[330px] place-items-center sm:h-[500px] sm:max-w-[420px] lg:h-[590px]"
             >
               <Image
-                src="/images/can.webp"
+                src="/images/xtreem-pro-can-v2.png"
                 alt="Xtreem Pro Caffeinated Beverage Can"
                 width={520}
                 height={760}

@@ -16,92 +16,61 @@ const NUTRITION_ROWS = [
 ];
 
 const LABEL_NOTES = [
-  "Serving size: 250 ml",
-  "Caffeine: 75 mg per serving",
-  "Read the approved pack before consuming",
+  ["01", "Serving size", "250 ml"],
+  ["02", "Caffeine", "75 mg per serving"],
+  ["03", "Pack guidance", "Read before consuming"],
 ];
 
 export default function NutritionSection() {
   return (
-    <section
-      id="nutrition"
-      aria-labelledby="nutrition-title"
-      className="relative overflow-hidden bg-[#070707] px-4 py-12 text-white sm:px-6 sm:py-16 lg:px-10"
-    >
-      <div className="pointer-events-none absolute -left-40 top-20 h-[420px] w-[420px] rounded-full bg-[#b6f000]/[0.07] blur-[120px]" />
-      <div className="pointer-events-none absolute right-[-12%] top-[30%] h-[520px] w-[520px] rounded-full border border-[#b6f000]/10 opacity-60" />
+    <section id="nutrition" aria-labelledby="nutrition-title" className="relative isolate overflow-hidden bg-[#060606] px-4 py-16 text-white sm:px-6 sm:py-24 lg:px-10">
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-30 [background-image:linear-gradient(rgba(182,240,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(182,240,0,0.08)_1px,transparent_1px)] [background-size:42px_42px] [mask-image:linear-gradient(to_bottom,black,transparent_78%)]" />
+      <div className="pointer-events-none absolute -left-40 top-0 -z-10 h-[460px] w-[460px] rounded-full bg-[#b6f000]/10 blur-[140px]" />
+      <div className="pointer-events-none absolute right-[-18rem] top-1/3 -z-10 h-[580px] w-[580px] rounded-full border border-[#b6f000]/15" />
 
-      <div className="relative mx-auto max-w-[1440px]">
-        <div className="mb-7 flex items-end justify-between gap-6 border-b border-white/10 pb-5 sm:mb-9 sm:pb-6">
-          <div>
-            <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#b6f000]">
-              <span className="h-px w-8 bg-[#b6f000]" />
-              03 / Label information
-            </div>
-            <h2
-              id="nutrition-title"
-              className="max-w-3xl text-[clamp(2.25rem,5.4vw,5.5rem)] font-black uppercase leading-[0.84] tracking-[-0.06em]"
-            >
-              Complete nutrition
-              <span className="block text-[#b6f000]">breakdown.</span>
-            </h2>
+      <div className="mx-auto max-w-[1440px]">
+        <header className="relative mb-10 border-b border-white/10 pb-8 sm:mb-14 sm:pb-10">
+          <div className="mb-5 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.32em] text-[#b6f000]">
+            <span className="h-px w-10 bg-[#b6f000]" /> 03 / Label information
           </div>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <h2 id="nutrition-title" className="max-w-4xl text-[clamp(2.5rem,5.5vw,5.5rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
+              Know what&apos;s<span className="block text-[#b6f000]">in the can.</span>
+            </h2>
+            <p className="max-w-xs border-l border-[#b6f000]/50 pl-4 text-sm leading-6 text-white/55">
+              Declared nutrition information for one 250 ml serving. The final approved product pack remains the reference.
+            </p>
+          </div>
+        </header>
 
-          <p className="hidden max-w-[230px] pb-1 text-right text-xs leading-5 text-white/45 sm:block">
-            A clear view of the declared nutrition information for one 250 ml
-            serving. The approved pack remains the final reference.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(104px,0.42fr)] items-start gap-3 sm:gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.72fr)] lg:gap-10">
-          <div className="min-w-0">
-            <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#101010] shadow-[0_20px_80px_rgba(0,0,0,0.35)] sm:rounded-[30px]">
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-4 sm:px-7 sm:py-6">
+        <div className="grid items-start gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-12">
+          <div className="order-2 min-w-0 lg:order-1 lg:col-span-8">
+            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0e0e0e] shadow-[0_24px_90px_rgba(0,0,0,0.45)] sm:rounded-[36px]">
+              <div className="flex flex-col gap-4 border-b border-white/10 bg-[linear-gradient(110deg,rgba(182,240,0,0.12),transparent_48%)] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-7">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#b6f000]">
-                    Nutrition information
-                  </p>
-                  <p className="mt-1 text-[11px] text-white/40 sm:text-xs">
-                    Values per 100 ml and per serving
-                  </p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.26em] text-[#b6f000]">Nutrition information</p>
+                  <p className="mt-2 text-xs text-white/45">Values per 100 ml and per 250 ml serving</p>
                 </div>
-                <span className="rounded-full border border-[#b6f000]/40 px-2.5 py-1 font-mono text-[9px] uppercase tracking-widest text-[#b6f000] sm:px-3 sm:text-[10px]">
-                  250 ml
-                </span>
+                <div className="flex items-center gap-3 self-start sm:self-auto">
+                  <span className="h-2 w-2 rounded-full bg-[#b6f000] shadow-[0_0_16px_#b6f000]" />
+                  <span className="rounded-full border border-[#b6f000]/40 bg-[#b6f000]/[0.07] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#d7ff53]">Serving / 250 ml</span>
+                </div>
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[410px] border-collapse text-left">
-                  <caption className="sr-only">
-                    XTREEM PRO nutrition information per 100 ml and per 250 ml
-                    serving
-                  </caption>
+                <table className="w-full min-w-[480px] border-collapse text-left">
+                  <caption className="sr-only">XTREEM PRO nutrition information per 100 ml and per 250 ml serving</caption>
                   <thead>
-                    <tr className="bg-white/[0.035] text-[9px] font-bold uppercase tracking-[0.16em] text-white/35 sm:text-[10px]">
-                      <th className="px-4 py-3 sm:px-7 sm:py-4">Nutrient</th>
-                      <th className="px-3 py-3 sm:px-4 sm:py-4">100 ml</th>
-                      <th className="px-3 py-3 sm:px-4 sm:py-4">Serving</th>
+                    <tr className="border-b border-white/[0.08] bg-black/20 text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
+                      <th className="px-5 py-4 sm:px-8">Nutrient</th><th className="px-4 py-4">Per 100 ml</th><th className="px-4 py-4 text-[#b6f000]">Per serving</th>
                     </tr>
                   </thead>
                   <tbody>
                     {NUTRITION_ROWS.map(([name, per100, serving], index) => (
-                      <tr
-                        key={name}
-                        className={`group transition-colors hover:bg-[#b6f000]/[0.06] ${
-                          index !== NUTRITION_ROWS.length - 1
-                            ? "border-b border-white/[0.07]"
-                            : ""
-                        }`}
-                      >
-                        <th className="px-4 py-3 text-xs font-medium text-white/75 sm:px-7 sm:py-4 sm:text-sm">
-                          {name}
-                        </th>
-                        <td className="px-3 py-3 font-mono text-[11px] text-white/45 sm:px-4 sm:py-4 sm:text-xs">
-                          {per100}
-                        </td>
-                        <td className="px-3 py-3 font-mono text-[11px] font-bold text-[#b6f000] sm:px-4 sm:py-4 sm:text-xs">
-                          {serving}
-                        </td>
+                      <tr key={name} className={`group transition-colors hover:bg-[#b6f000]/[0.055] ${index !== NUTRITION_ROWS.length - 1 ? "border-b border-white/[0.065]" : ""}`}>
+                        <th className="px-5 py-3.5 text-sm font-medium text-white/80 sm:px-8 sm:py-4"><span className="mr-3 inline-block font-mono text-[10px] text-white/20">{String(index + 1).padStart(2, "0")}</span>{name}</th>
+                        <td className="px-4 py-3.5 font-mono text-xs text-white/45 sm:py-4">{per100}</td>
+                        <td className="px-4 py-3.5 font-mono text-xs font-bold text-[#cfff45] sm:py-4">{serving}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -109,67 +78,35 @@ export default function NutritionSection() {
               </div>
             </div>
 
-            <div className="mt-3 grid gap-3 sm:mt-5 sm:grid-cols-3">
-              {LABEL_NOTES.map((note, index) => (
-                <div
-                  key={note}
-                  className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 sm:p-5"
-                >
-                  <span className="font-mono text-[10px] text-[#b6f000]">
-                    0{index + 1}
-                  </span>
-                  <p className="mt-4 text-xs leading-5 text-white/60">{note}</p>
+            <div className="mt-4 grid gap-3 sm:mt-5 sm:grid-cols-3">
+              {LABEL_NOTES.map(([index, label, value]) => (
+                <div key={label} className="group rounded-2xl border border-white/10 bg-white/[0.035] p-4 transition-colors hover:border-[#b6f000]/35 hover:bg-[#b6f000]/[0.045] sm:p-5">
+                  <span className="font-mono text-[10px] text-[#b6f000]">{index}</span>
+                  <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">{label}</p>
+                  <p className="mt-1 text-sm font-medium text-white/75">{value}</p>
                 </div>
               ))}
             </div>
-
-            <p className="mt-5 max-w-2xl text-[11px] leading-5 text-white/35 sm:text-xs">
-              Nutrition and ingredient information must match the approved
-              product label and laboratory documentation. Values shown here are
-              for website communication only.
-            </p>
+            <p className="mt-5 max-w-3xl text-xs leading-5 text-white/35">Nutrition and ingredient information must match the approved product label and laboratory documentation. Values shown here are for website communication only.</p>
           </div>
 
-          <aside className="relative min-w-0 lg:sticky lg:top-28">
-            <div className="relative overflow-hidden rounded-[22px] border border-[#b6f000]/25 bg-[radial-gradient(circle_at_50%_25%,rgba(182,240,0,0.18),transparent_42%),#0d0d0d] p-3 sm:rounded-[30px] sm:p-8">
-              <div className="absolute left-3 top-3 font-mono text-[8px] uppercase tracking-[0.2em] text-white/35 sm:left-7 sm:top-7 sm:text-[10px]">
-                XP / 250 ml
-              </div>
-              <div className="absolute right-3 top-3 h-3 w-3 border-r border-t border-[#b6f000] sm:right-7 sm:top-7 sm:h-5 sm:w-5" />
-
-              <Image
-                src="/images/can.webp"
-                alt="XTREEM PRO 250 ml caffeinated beverage can"
-                width={520}
-                height={760}
-                priority
-                sizes="(max-width: 640px) 110px, (max-width: 1024px) 240px, 380px"
-                className="mx-auto mt-6 h-auto w-full max-w-[112px] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.65)] sm:mt-8 sm:max-w-[300px]"
-              />
-
-              <div className="mt-2 border-t border-white/10 pt-3 sm:mt-5 sm:pt-5">
-                <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#b6f000] sm:text-[10px]">
-                  Caffeinated beverage
-                </p>
-                <p className="mt-2 hidden text-xs leading-5 text-white/45 sm:block">
-                  Please read the ingredient list, caffeine quantity and serving
-                  guidance on the final pack before consuming.
-                </p>
+          <aside className="order-1 lg:order-2 lg:col-span-4 lg:sticky lg:top-28">
+            <div className="relative overflow-hidden rounded-[28px] border border-[#b6f000]/25 bg-[radial-gradient(circle_at_52%_30%,rgba(182,240,0,0.2),transparent_33%),linear-gradient(145deg,#171717,#0a0a0a_70%)] p-5 shadow-[0_20px_70px_rgba(0,0,0,0.4)] sm:rounded-[36px] sm:p-7">
+              <div className="absolute left-5 top-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-white/45 sm:left-7 sm:top-7"><span className="h-1.5 w-1.5 rounded-full bg-[#b6f000]" /> XP / 250 ml</div>
+              <div className="absolute right-5 top-5 h-4 w-4 border-r border-t border-[#b6f000] sm:right-7 sm:top-7" />
+              <div className="absolute bottom-5 left-5 h-4 w-4 border-b border-l border-[#b6f000]/50 sm:bottom-7 sm:left-7" />
+              <Image src="/images/xtreem-pro-can-v2.png" alt="XTREEM PRO 250 ml caffeinated beverage can" width={520} height={760} priority sizes="(max-width: 1024px) 210px, 390px" className="relative mx-auto mt-9 h-auto w-full max-w-[180px] object-contain drop-shadow-[0_28px_32px_rgba(0,0,0,0.78)] sm:mt-10 sm:max-w-[285px]" />
+              <div className="relative mt-3 flex items-end justify-between gap-4 border-t border-white/10 pt-4 sm:mt-5 sm:pt-5">
+                <div><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#b6f000]">Caffeinated beverage</p><p className="mt-1 text-xs text-white/40">Best served chilled</p></div>
+                <span className="font-mono text-xs text-white/55">250 ML</span>
               </div>
             </div>
-
-            <div className="mt-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4 sm:mt-5 sm:rounded-3xl sm:p-6">
+            <div className="mt-4 rounded-[24px] border border-white/10 bg-white/[0.035] p-5 sm:rounded-[28px] sm:p-6">
               <div className="flex items-start justify-between gap-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-                  Caffeine guide
-                </p>
-                <span className="font-mono text-[10px] text-[#b6f000]">75 MG</span>
+                <div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Caffeine guide</p><p className="mt-2 font-mono text-2xl font-bold tracking-tight text-[#b6f000]">75 <span className="text-sm">MG</span></p></div>
+                <span className="rounded-full border border-[#b6f000]/30 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#b6f000]">Per serving</span>
               </div>
-              <p className="mt-3 text-xs leading-5 text-white/60">
-                Not recommended for children, pregnant or lactating women, or
-                persons sensitive to caffeine. Consume not more than 500 ml per
-                day.
-              </p>
+              <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-white/60">Not recommended for children, pregnant or lactating women, or persons sensitive to caffeine. Consume not more than 500 ml per day.</p>
             </div>
           </aside>
         </div>

@@ -22,7 +22,7 @@
  *   Falls back to system fonts cleanly if omitted.
  *
  * Image:
- *   Place your product can image at /public/images/can.png
+ *   Product can source: /public/images/xtreem-pro-can-v2.png
  *   (transparent background PNG, can isolated, recommended).
  */
 
@@ -856,7 +856,7 @@ export default function BenefitsSection() {
             <div className="bx-can-img-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/can.png"
+                src="/images/xtreem-pro-can-v2.png"
                 alt="Xtreem Pro XP caffeinated beverage can"
                 className="bx-can-img"
                 ref={canImgRef}

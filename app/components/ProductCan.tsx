@@ -60,7 +60,7 @@ export default function ProductCan() {
         }}
       >
         <Image
-          src="/images/can.png"
+          src="/images/xtreem-pro-can-v2.png"
           alt="XTREEM Pro XP Caffeinated Beverage"
           width={600}
           height={600}
