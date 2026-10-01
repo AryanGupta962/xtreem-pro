@@ -228,7 +228,7 @@ export default function EnergyShowcase() {
           {/* ── Video frame ── */}
           <div
             className="es2-video-frame relative overflow-hidden"
-            style={{ height: "clamp(220px, 55vw, 360px)" }}
+            style={{ height: "clamp(500px, 55vw, 680px)" }}
           >
             {/* Extra height for parallax */}
             <div
