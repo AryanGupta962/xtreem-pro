@@ -5,11 +5,9 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Zap,
   Atom,
   BicepsFlexed,
   ShieldCheck,
-  Leaf,
   ArrowRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -110,10 +108,10 @@ const STATS = [
 export default function BenefitsSectionTwo() {
   const sectionRef = useRef<HTMLElement>(null);
   const canRef = useRef<HTMLDivElement>(null);
-  const meterRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const detailRef = useRef<HTMLDivElement>(null);
   const prevActiveRef = useRef(0);
+  const prefersReducedMotionRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeBenefit = BENEFITS[activeIndex];
 
@@ -124,6 +122,8 @@ export default function BenefitsSectionTwo() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+
+    prefersReducedMotionRef.current = prefersReducedMotion;
 
     const ctx = gsap.context(() => {
       gsap.from(".benefits-kicker", {
@@ -165,69 +165,29 @@ export default function BenefitsSectionTwo() {
           ease: "sine.inOut",
         });
       }
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        scrub: 0.45,
-        onUpdate: (self) => {
-          const pct = Math.round(self.progress * 100);
-          const nextIndex = BENEFITS.reduce(
-            (current, benefit, index) =>
-              pct >= benefit.threshold ? index : current,
-            0,
-          );
-
-          if (meterRef.current) {
-            gsap.to(meterRef.current, {
-              width: `${Math.max(8, pct)}%`,
-              duration: 0.15,
-              ease: "none",
-              overwrite: true,
-            });
-          }
-
-          if (nextIndex === prevActiveRef.current) return;
-          prevActiveRef.current = nextIndex;
-          setActiveIndex(nextIndex);
-
-          // const focusedCard = cardRefs.current[nextIndex];
-          // if (focusedCard && !prefersReducedMotion) {
-          //   gsap.fromTo(
-          //     focusedCard,
-          //     { x: -38, scale: 0.96, filter: "blur(3px)" },
-          //     {
-          //       x: 0,
-          //       scale: 1,
-          //       filter: "blur(0px)",
-          //       duration: 0.5,
-          //       ease: "back.out(1.7)",
-          //       overwrite: true,
-          //     },
-          //   );
-          // }
-
-          if (detailRef.current && !prefersReducedMotion) {
-            gsap.fromTo(
-              detailRef.current,
-              { opacity: 0, x: 34, filter: "blur(4px)" },
-              {
-                opacity: 1,
-                x: 0,
-                filter: "blur(0px)",
-                duration: 0.45,
-                ease: "power3.out",
-                overwrite: true,
-              },
-            );
-          }
-        },
-      });
     }, section);
 
     return () => ctx.revert();
   }, []);
+
+  // Detail panel changes only when a benefit is clicked
+  useEffect(() => {
+    if (prevActiveRef.current === activeIndex) return;
+    prevActiveRef.current = activeIndex;
+    if (!detailRef.current || prefersReducedMotionRef.current) return;
+    gsap.fromTo(
+      detailRef.current,
+      { opacity: 0, x: 34, filter: "blur(4px)" },
+      {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        duration: 0.45,
+        ease: "power3.out",
+        overwrite: true,
+      },
+    );
+  }, [activeIndex]);
 
   return (
     <section
@@ -272,6 +232,7 @@ export default function BenefitsSectionTwo() {
                 key={benefit.id}
                 benefit={benefit}
                 active={index === activeIndex}
+                onSelect={() => setActiveIndex(index)}
                 setRef={(el) => {
                   cardRefs.current[index] = el;
                 }}
@@ -297,8 +258,8 @@ export default function BenefitsSectionTwo() {
 
             <div className="mt-3 h-2 w-full max-w-[360px] overflow-hidden rounded-full border border-[#C8FF00]/25 bg-white/10 lg:hidden">
               <div
-                ref={meterRef}
-                className="h-full w-[8%] rounded-full bg-gradient-to-r from-lime-600 to-[#C8FF00] shadow-[0_0_18px_rgba(200,255,0,0.55)]"
+                className="h-full rounded-full bg-gradient-to-r from-lime-600 to-[#C8FF00] shadow-[0_0_18px_rgba(200,255,0,0.55)] transition-[width] duration-500"
+                style={{ width: `${activeBenefit.threshold}%` }}
               />
             </div>
           </div>
@@ -396,17 +357,29 @@ export default function BenefitsSectionTwo() {
 function BenefitCard({
   benefit,
   active,
+  onSelect,
   setRef,
 }: {
   benefit: Benefit;
   active: boolean;
+  onSelect: () => void;
   setRef: (el: HTMLDivElement | null) => void;
 }) {
   const Icon = benefit.icon;
   const card = (
     <div
       ref={setRef}
-      className={`benefit-card-shell group flex items-center gap-4 rounded-xl border-2 px-4 py-4 transition-all duration-300 sm:px-5 ${
+      role="button"
+      tabIndex={0}
+      aria-pressed={active}
+      onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+      className={`benefit-card-shell group cursor-pointer flex items-center gap-4 rounded-xl border-2 px-4 py-4 transition-all duration-300 sm:px-5 ${
         active
           ? "border-[#C8FF00]/80 bg-[#C8FF00]/10 shadow-[0_0_24px_rgba(200,255,0,0.28)]"
           : "border-white/10 bg-black/45 hover:border-[#C8FF00]/35"
