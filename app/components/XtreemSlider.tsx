@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, memo } from "react";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const DURATION_MS = 5000;
@@ -10,7 +10,7 @@ const BLACK = "#080808";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Slide {
-  src: string;
+  src: string; // file name, present in both images/xtreem/desktop and /mobile
   alt: string;
   eyebrow: string;
   headlineParts: [string, string, string]; // [before, highlight, after]
@@ -18,10 +18,66 @@ interface Slide {
   badge: string; // small pill label bottom-right
 }
 
+// ─── Responsive image (desktop art ≥ 768px, mobile art below) ────────────────
+const MOBILE_MAX = 767;
+
+const SlideImage = memo(function SlideImage({
+  file,
+  alt,
+  priority,
+  className,
+  width,
+  height,
+  sizes,
+}: {
+  file: string;
+  alt: string;
+  priority?: boolean;
+  className?: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+}) {
+  const common = {
+    alt,
+    priority,
+    sizes,
+    ...(width && height ? { width, height } : { fill: true as const }),
+  };
+  const { props: desktop } = getImageProps({
+    ...common,
+    src: `/images/xtreem/desktop/${file}`,
+  });
+  const { props: mobile } = getImageProps({
+    ...common,
+    src: `/images/xtreem/mobile/${file}`,
+  });
+  const { srcSet: mobileSrcSet } = mobile;
+  const { style, ...img } = desktop;
+
+  return (
+    <picture>
+      <source media={`(max-width: ${MOBILE_MAX}px)`} srcSet={mobileSrcSet} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        {...img}
+        alt={alt}
+        className={className}
+        style={{
+          ...style,
+          objectFit: "cover",
+          objectPosition: "center top",
+          display: "block",
+        }}
+      />
+    </picture>
+  );
+});
+
 // ─── Slide data ───────────────────────────────────────────────────────────────
 const SLIDES: Slide[] = [
   {
-    src: "/images/xtreem/img-1.png",
+    src: "img-1.webp",
     alt: "XTREEM PRO caffeinated beverage held against a bright sky",
     eyebrow: "A Shared View",
     headlineParts: ["Take In The ", "Moment", ""],
@@ -29,7 +85,7 @@ const SLIDES: Slide[] = [
     badge: "Caffeinated Beverage",
   },
   {
-    src: "/images/xtreem/img-2.png",
+    src: "img-2.webp",
     alt: "XTREEM PRO caffeinated beverage in a mountain setting",
     eyebrow: "The Outdoors",
     headlineParts: ["Enjoy The ", "View", ""],
@@ -37,7 +93,7 @@ const SLIDES: Slide[] = [
     badge: "Caffeinated Beverage",
   },
   {
-    src: "/images/xtreem/img-3.png",
+    src: "img-3.webp",
     alt: "XTREEM PRO caffeinated beverage in an urban skate setting",
     eyebrow: "City Moments",
     headlineParts: ["Make Room For ", "Your Day", ""],
@@ -45,7 +101,7 @@ const SLIDES: Slide[] = [
     badge: "Read The Label",
   },
   {
-    src: "/images/xtreem/img-4.png",
+    src: "img-4.webp",
     alt: "XTREEM PRO caffeinated beverage at a football stadium",
     eyebrow: "Match Day",
     headlineParts: ["UNLEASH ", "YOUR MOMENT", ""],
@@ -53,7 +109,7 @@ const SLIDES: Slide[] = [
     badge: "Caffeinated Beverage",
   },
   {
-    src: "/images/xtreem/img-5.png",
+    src: "img-5.webp",
     alt: "XTREEM PRO caffeinated beverage beside a race track",
     eyebrow: "Trackside",
     headlineParts: ["Take A ", "Pause", ""],
@@ -61,7 +117,7 @@ const SLIDES: Slide[] = [
     badge: "Read The Label",
   },
   {
-    src: "/images/xtreem/img-6.png",
+    src: "img-6.webp",
     alt: "XTREEM PRO caffeinated beverage in a pit lane",
     eyebrow: "Pit Lane",
     headlineParts: ["Enjoy The ", "Occasion", ""],
@@ -69,7 +125,7 @@ const SLIDES: Slide[] = [
     badge: "Read The Label",
   },
   {
-    src: "/images/xtreem/img-7.png",
+    src: "img-7.webp",
     alt: "XTREEM PRO caffeinated beverage above a stadium",
     eyebrow: "From The Stands",
     headlineParts: ["Share The ", "Moment", ""],
@@ -310,14 +366,12 @@ export default function XtreemSlider() {
               aria-hidden={!isActive}
             >
               {/* Background image */}
-              <Image
-                src={slide.src}
+              <SlideImage
+                file={slide.src}
                 alt={slide.alt}
-                fill
                 priority={i === 0}
                 sizes="100vw"
                 className={`xt-bg-img${isActive ? " xt-bg-img--active" : ""}`}
-                style={{ objectFit: "cover", objectPosition: "center top" }}
               />
 
               {/* Grain noise overlay */}
@@ -388,16 +442,12 @@ export default function XtreemSlider() {
               aria-label={`Jump to slide ${i + 1}`}
               className={`xt-thumb${i === current ? " xt-thumb--active" : ""}`}
             >
-              <Image
-                src={slide.src}
+              <SlideImage
+                file={slide.src}
                 alt=""
                 width={52}
                 height={36}
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  display: "block",
-                }}
+                sizes="54px"
               />
             </button>
           ))}
